@@ -1,16 +1,19 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+Route::get('/test', function() {
+   echo bcrypt('admin');
+});
 
-Route::get('/', function () {
-    return view('welcome');
+// Public Routes
+Route::get('/', ['uses'=>'UserController@getIndex', 'as'=>'index']);
+Route::post('/login', ['uses'=>'UserController@postLogin', 'as'=>'login']);
+Route::get('/forgot-password', ['uses'=>'UserController@getForgotPassword', 'as'=>'forgot-password']);
+
+
+// Authenticated Routes & prefixed with /dashboard
+Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
+
+    Route::get('/', [ 'uses'=>'UserController@getDashboard', 'as'=>'dashboard']);
+    Route::get('/logout', ['uses'=>'UserController@getLogout', 'as'=>'logout']);
+
 });

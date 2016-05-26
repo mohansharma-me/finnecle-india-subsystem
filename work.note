@@ -1,0 +1,17 @@
+NGOs
+	Number, Description
+
+CHANNEL MANAGEMENT ->
+	Add -> Name, Draws,
+Draw management ->
+	Add -> Name, Time, AutomaticWinningRatio = (var% = 10) eg . donation=1000 ratio=10 then luckyamount must ne less than 100 (10%) and closer to 100
+Center management ->
+	Add -> Type(Donator, Withdrawer), Name, LoginCredentials, CommisionRatio,
+	LuckyRatios ->
+		Add -> CenterId, (GameWise) - LuckyRatio value as per FinnecleIndia like 9
+
+	Donations ->
+		Add -> NGO(s), NGO wise amount, Tags, LuckyAmount, LuckyRatio, Paid, TransactionId
+
+	Report ->
+		Donations filter...
