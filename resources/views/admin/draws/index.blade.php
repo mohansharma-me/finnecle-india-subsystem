@@ -1,12 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Channels')
+@section('title', 'Draws')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <h1 class="clearfix">
-                Channels
+                <label class="pull-left">Draws</label>
+                <a href="{{route('new-draw')}}" class="btn btn-success pull-right">New Draw</a>
             </h1>
             <hr/>
         </div>
@@ -26,75 +27,40 @@
                     {{session('success_message')}}
                 </div>
             @endif
-
         </div>
-        <div class="col-md-9 col-sm-12">
+        <div class="col-md-12 col-sm-12">
             <div class="well">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Channel name</th>
-                            <th>Last Modified Date</th>
-                            <th>Action</th>
+                            <th style="border-bottom: 1px solid darkgray;">#</th>
+                            <th style="border-bottom: 1px solid darkgray;">Draw</th>
+                            <th style="border-bottom: 1px solid darkgray;">Channel</th>
+                            <th style="border-bottom: 1px solid darkgray;">Time</th>
+                            <th style="border-bottom: 1px solid darkgray;">Automatic Ratio</th>
+                            <th style="border-bottom: 1px solid darkgray;">Action</th>
                         </tr>
                     </thead>
-
                     <tbody>
-                        @foreach($channels as $channel)
-                            <tr>
-                                <td>{{$channel->id}}</td>
-                                <td>{{$channel->name}}</td>
-                                <td>{{$channel->updated_at}}</td>
-                                <td>
-                                    <form method="post" action="{{route('delete-channel', ['channel' => $channel->id])}}">
-                                        <a href="{{route('edit-channel', ['channel'=>$channel->id])}}" class="btn btn-xs btn-warning">Edit</a>
-                                        <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure to delete all records related to this channel ?')">Delete</button>
-                                        {{csrf_field()}}
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach($draws as $draw)
+                        <tr>
+                            <td>{{$draw->id}}</td>
+                            <td>{{$draw->name}}</td>
+                            <td>{{$draw->channel->name}}</td>
+                            <td>{{$draw->draw_time}}</td>
+                            <td>{{$draw->automatic_ratio}}</td>
+                            <td>
+                                <form method="post" action="{{route('delete-draw-post', ["draw"=>$draw->id])}}">
+                                    <a href="{{route('edit-draw',  ["draw"=>$draw->id])}}" class="btn btn-xs btn-success">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete all records related to this draw ?')">Delete</button>
+                                    {{csrf_field()}}
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
-                <center>{!!$channels->render()!!}</center>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-12">
-            <div class="well">
-                <form method="post" action="{{route('create-new-channel')}}" class="form-horizontal">
-                    <fieldset>
-                        <legend>Create new channel</legend>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <label for="inputChannel">Channel name :</label>
-                                <input class="form-control" id="inputChannel" placeholder="Channel name..." type="text" name="name">
-                            </div>
-                        </div>
-                        <div class="">
-                            @if(count($errors))
-                                <div class="alert alert-danger">
-                                @foreach($errors->all() as $error)
-                                    <p>{{$error}}</p>
-                                @endforeach
-                                </div>
-                            @endif
-                            @if(session('create_message'))
-                                <div class="alert alert-{{session('create_success') ? 'success':'danger'}}">
-                                    {{session('create_message')}}
-                                </div>
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-success">
-                                    Create
-                                </button>
-                            </div>
-                        </div>
-                    </fieldset>
-                    {{csrf_field()}}
-                </form>
+                <center>{!!$draws->render()!!}</center>
             </div>
         </div>
     </div>

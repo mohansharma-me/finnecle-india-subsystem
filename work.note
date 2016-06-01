@@ -1,4 +1,6 @@
-NGOs
+Game
+NgoGroup
+Ngo
 	Number, Description
 
 CHANNEL MANAGEMENT ->
@@ -10,8 +12,11 @@ Center management ->
 	LuckyRatios ->
 		Add -> CenterId, (GameWise) - LuckyRatio value as per FinnecleIndia like 9
 
+    Transactions:
+        Add -> Id, Ref, DrawId, CenterId, Paid?, CenterCommission, Notes
+
 	Donations ->
-		Add -> NGO(s), NGO wise amount, Tags, LuckyAmount, LuckyRatio, Paid, TransactionId
+		Add -> Id, Tran_Id, NgoId, Amount, LuckyRatio
 
 	Report ->
 		Donations filter...

@@ -1,5 +1,4 @@
 <?php
 
-namespace Picqer\Barcode\Exceptions;
-
+namespace App\Lib\BarcodeGenerator\Exceptions;
 class UnknownTypeException extends BarcodeException {}

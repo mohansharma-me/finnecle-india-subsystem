@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'New Center')
+@section('title', 'Edit Center')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <h1 class="clearfix">
-                <label class="pull-left">Centers <small>New Center</small></label>
+                <label class="pull-left">Centers <small>Edit Center</small></label>
                 <a href="{{route('centers')}}" class="btn btn-info pull-right">Back</a>
             </h1>
             <hr/>
@@ -33,40 +33,41 @@
         </div>
         <div class="col-md-6 col-md-offset-3 col-sm-12">
             <div class="well">
-                <form class="form-horizontal" method="post" action="{{route('new-center-post')}}">
+                <form class="form-horizontal" method="post" action="{{route('edit-center-post', ["center"=>$center->id])}}">
                     <fieldset>
-                        <legend>New Center</legend>
+                        <legend>Edit Center</legend>
                         <div class="form-group">
                             <label for="inputType" class="control-label col-lg-3">Type :</label>
                             <div class="col-lg-9">
                                 <select id="inputType" name="type" class="form-control">
-                                    <option value="donator">Donator</option>
-                                    <option value="cashier">Cashier</option>
+                                    <option value="cashier" {{$center->user->hasRole('cashier') ? 'selected' : ''}}>Cashier</option>
+                                    <option value="donator" {{$center->user->hasRole('donator') ? 'selected' : ''}}>Donator</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputName" class="control-label col-lg-3">Center name:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" placeholder="Center name..." id="inputName" name="name" value="{{old('name')}}" />
+                                <input type="text" class="form-control" placeholder="Center name..." id="inputName" name="name" value="{{ old('name') ? old('name') : $center->name}}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputEmail" class="control-label col-lg-3">E-mail address:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" placeholder="E-mail address" id="inputEmail" name="email" value="{{old('email')}}" />
+                                <input type="text" class="form-control" placeholder="E-mail address" id="inputEmail" name="email" value="{{ old('email') ? old('email') : $center->user->email}}" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputPassword" class="control-label col-lg-3">Password:</label>
                             <div class="col-lg-9">
                                 <input type="password" class="form-control" placeholder="Password..." id="inputPassword" name="password" value="{{old('password')}}" />
+                                <small>Leave blank if you do not want to change password</small>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="inputRatio" class="control-label col-lg-3">Commission Ratio:</label>
                             <div class="col-lg-9">
-                                <input type="text" class="form-control" placeholder="Commission ratio in digits..." id="inputRatio" name="commission_ratio" value="{{old('commission_ratio')}}" />
+                                <input type="text" class="form-control" placeholder="Commission ratio in digits..." id="inputRatio" name="commission_ratio" value="{{old('commission_ratio') ? old('commission_ratio') : $center->commission_ratio}}" />
                             </div>
                         </div>
                     </fieldset>
@@ -77,7 +78,7 @@
                             <div class="form-group">
                                 <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
                                 <div class="col-lg-9">
-                                    <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{old('game')[$game->id]}}" />
+                                    <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{ old('game') ? old('game')[$game->id] : $center->ratios()->where('game_id', $game->id)->first()->ratio}}" />
                                 </div>
                             </div>
                         @endforeach

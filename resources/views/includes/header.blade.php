@@ -12,7 +12,7 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="{{route('index')}}">{{Auth::check() ? 'Dashboard': 'Home'}}</a></li>
+                <li class="{{ Route::getCurrentRoute()->getName() == "index" || Route::getCurrentRoute()->getName() == "dashboard" ? "active" : ""  }}"><a href="{{route('index')}}">{{Auth::check() ? 'Dashboard': 'Home'}}</a></li>
                 @if(Auth::check() && view()->exists(Auth::user()->getRole('.nav')))
                     @include(Auth::user()->getRole('.nav'))
                 @endif
@@ -29,7 +29,7 @@
                         </ul>
                     </li>
                 @else
-                    <li><a href="{{route('forgot-password')}}">Forgot Password ?</a></li>
+                    <li class="{{ Route::getCurrentRoute()->getName() == "forgot-password" ? "active" : "" }}"><a href="{{route('forgot-password')}}">Forgot Password ?</a></li>
                 @endif
             </ul>
         </div>

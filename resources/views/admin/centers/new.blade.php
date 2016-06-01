@@ -1,19 +1,22 @@
 @extends('layouts.master')
 
-@section('title', 'New Draw')
+@section('title', 'New Center')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <h1 class="clearfix">
-                <label class="pull-left">Draws <small>New Draw</small></label>
-                <a href="{{route('draws')}}" class="btn btn-info pull-right">Back</a>
+                <label class="pull-left">Centers <small>New Center</small></label>
+                <a href="{{route('centers')}}" class="btn btn-info pull-right">Back</a>
             </h1>
             <hr/>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 col-md-offset-3 col-sm-12">
+
+            @include('includes.validation_errors')
+
             @if(session('error_message'))
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -30,59 +33,63 @@
         </div>
         <div class="col-md-6 col-md-offset-3 col-sm-12">
             <div class="well">
-                <form class="form-horizontal" method="post" action="{{route('new-draw-post')}}">
+                <form class="form-horizontal" method="post" action="{{route('new-center-post')}}">
                     <fieldset>
-                        <legend>New Draw</legend>
+                        <legend>New Center</legend>
                         <div class="form-group">
-                            <label for="inputChannel" class="control-label col-lg-3">Channel :</label>
+                            <label for="inputType" class="control-label col-lg-3">Type :</label>
                             <div class="col-lg-9">
-                                <select class="form-control" id="inputChannel" name="channel" required>
-                                    @foreach($channels as $channel)
-                                        <option value="{{$channel->id}}">{{$channel->name}}</option>
-                                    @endforeach
+                                <select id="inputType" name="type" class="form-control">
+                                    <option value="donator">Donator</option>
+                                    <option value="cashier">Cashier</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputName" class="control-label col-lg-3">Draw :</label>
+                            <label for="inputName" class="control-label col-lg-3">Center name:</label>
                             <div class="col-lg-9">
-                                <input type="text" name="name" placeholder="Draw name..." class="form-control" required />
+                                <input type="text" class="form-control" placeholder="Center name..." id="inputName" name="name" value="{{old('name')}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputTime" class="control-label col-lg-3">Time :</label>
-                            <div class="col-lg-4">
-                                <label>Hour: (HH)</label>
-                                <select name="hh" class="form-control">
-                                    @for($h=0;$h<24;$h++)
-                                        {{ $h = $h < 10 ? "0".$h : $h  }}
-                                        <option value="{{$h}}">{{$h}}</option>
-                                    @endfor
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                                <label>Minute: (MM)</label>
-                                <select name="mm" class="form-control">
-                                    @for($m=0;$m<60;$m++)
-                                        {{ $m = $m < 10 ? "0".$m : $m  }}
-                                        <option value="{{$m}}">{{$m}}</option>
-                                    @endfor
-                                </select>
+                            <label for="inputEmail" class="control-label col-lg-3">E-mail address:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" placeholder="E-mail address" id="inputEmail" name="email" value="{{old('email')}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputTime" class="control-label col-lg-3">Winning Ratio:</label>
+                            <label for="inputPassword" class="control-label col-lg-3">Password:</label>
                             <div class="col-lg-9">
-                                <input type="text" name="automatic_ratio" placeholder="Automatic Ratio" class="form-control" pattern="[0-9]+" title="Please enter valid automatic winning ratio (eg. 10)" required/>
+                                <input type="password" class="form-control" placeholder="Password..." id="inputPassword" name="password" value="{{old('password')}}" />
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-lg-3"></div>
+                            <label for="inputRatio" class="control-label col-lg-3">Commission Ratio:</label>
                             <div class="col-lg-9">
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <input type="text" class="form-control" placeholder="Commission ratio in digits..." id="inputRatio" name="commission_ratio" value="{{old('commission_ratio')}}" />
                             </div>
                         </div>
                     </fieldset>
+
+                    <legend>Lucky Ratios</legend>
+                    <fieldset>
+                        @foreach($games as $game)
+                            <div class="form-group">
+                                <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
+                                <div class="col-lg-9">
+                                    <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{old('game')[$game->id]}}" />
+                                </div>
+                            </div>
+                        @endforeach
+                    </fieldset>
+
+                    <div class="form-group">
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-9">
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+
                     {{csrf_field()}}
                 </form>
             </div>

@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Home') - {{env('PROJECT')}}</title>
 
+    <link href="<?=URL::to('css/pace.css')?>" rel="stylesheet">
+    <script src="<?=URL::to('js/pace.min.js')?>"></script>
+
     <!-- Bootstrap -->
-    <link href="<?=URL::to('css/bootstrap.min.css')?>" rel="stylesheet">
+    <link href="<?=URL::to('css/lumen.bootstrap.min.css')?>" rel="stylesheet">
     <link href="<?=URL::to('css/style.css')?>" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Draws')
+@section('title', 'Centers')
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
             <h1 class="clearfix">
-                <label class="pull-left">Draws</label>
-                <a href="{{route('new-draw')}}" class="btn btn-success pull-right">New Draw</a>
+                <label class="pull-left">Centers</label>
+                <a href="{{route('new-center')}}" class="btn btn-success pull-right">New Center</a>
             </h1>
             <hr/>
         </div>
@@ -34,25 +34,29 @@
                     <thead>
                         <tr>
                             <th style="border-bottom: 1px solid darkgray;">#</th>
-                            <th style="border-bottom: 1px solid darkgray;">Draw</th>
-                            <th style="border-bottom: 1px solid darkgray;">Channel</th>
-                            <th style="border-bottom: 1px solid darkgray;">Time</th>
-                            <th style="border-bottom: 1px solid darkgray;">Automatic Ratio</th>
+                            <th style="border-bottom: 1px solid darkgray;">Name</th>
+                            <th style="border-bottom: 1px solid darkgray;">E-mail</th>
+                            <th style="border-bottom: 1px solid darkgray;">Commission</th>
+                            <th style="border-bottom: 1px solid darkgray;">Lucky Ratio</th>
                             <th style="border-bottom: 1px solid darkgray;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($draws as $draw)
+                    @foreach($centers as $center)
                         <tr>
-                            <td>{{$draw->id}}</td>
-                            <td>{{$draw->name}}</td>
-                            <td>{{$draw->channel->name}}</td>
-                            <td>{{$draw->draw_time}}</td>
-                            <td>{{$draw->automatic_ratio}}</td>
+                            <td>{{$center->id}}</td>
+                            <td>{{$center->name}} <i>({{$center->user->role}})</i></td>
+                            <td>{{$center->user->email}}</td>
+                            <td>{{$center->commission_ratio}}</td>
                             <td>
-                                <form method="post" action="{{route('delete-draw-post', ["draw"=>$draw->id])}}">
-                                    <a href="{{route('edit-draw',  ["draw"=>$draw->id])}}" class="btn btn-xs btn-success">Edit</a>
-                                    <button type="submit" class="btn btn-danger btn-xs"  onclick="return confirm('Are you sure to delete all records related to this draw ?')">Delete</button>
+                                @foreach($center->ratios as $ratio)
+                                    <li>{{$ratio->game->name}} ({{$ratio->ratio}})</li>
+                                @endforeach
+                            </td>
+                            <td>
+                                <form method="post" action="{{route('delete-center-post', ['center'=>$center->id])}}">
+                                    <a href="{{route('edit-center', ['center'=>$center->id])}}" class="btn btn-xs btn-success">Edit</a>
+                                    <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure to delete all related to this center ?')">Delete</button>
                                     {{csrf_field()}}
                                 </form>
                             </td>
@@ -60,7 +64,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                <center>{!!$draws->render()!!}</center>
+                <center>{!!$centers->render()!!}</center>
             </div>
         </div>
     </div>

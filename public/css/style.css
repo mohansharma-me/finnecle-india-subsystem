@@ -3,3 +3,26 @@
     -moz-border-radius: 0px;
     border-radius: 0px;
 }
+
+.navbar li.active {
+    background: #e7e7e7;
+}
+
+.highlight .form-group {
+    text-align: center;
+
+}
+
+.highlight.global {
+    background: #0c516c;
+    color: white;
+}
+
+.highlight:hover {
+    background: #0c516c;
+    color: white;
+}
+
+.ngo-input {
+    width: 100px;
+}
