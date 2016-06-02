@@ -9,6 +9,7 @@ class Transaction extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['declaration_id'];
     protected $dates = ['deleted_at'];
 
     public function amount() {
@@ -19,6 +20,9 @@ class Transaction extends Model
         $ret = "";
         foreach($this->donations as $donation) {
             $ret .= $donation->ngo->description.", ";
+        }
+        if(strlen($ret) > 2 ){
+            $ret[strlen($ret)-2]=".";
         }
         return $ret;
     }

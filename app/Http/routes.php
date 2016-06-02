@@ -39,12 +39,20 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::post('/centers/{center}', ['uses'=>'CenterController@postEditCenter', 'as'=>'edit-center-post']);
     Route::post('/centers/delete/{center}', ['uses'=>'CenterController@postDeleteCenter', 'as'=>'delete-center-post']);
 
+    // Declare
+    Route::get('/declare-ngo', ['uses'=>'DeclarationController@getDeclareNgo', 'as'=>'declare-ngo']);
+    Route::get('/declare-ngo/{channel}', ['uses'=>'DeclarationController@getDeclareNgo_channel', 'as'=>'declare-ngo-channel']);
+    Route::get('/declare-ngo/{channel}/{draw}', ['uses'=>'DeclarationController@getDeclareNgo_channel_draw', 'as'=>'declare-ngo-channel-draw']);
+    Route::get('/declare-ngo/{channel}/{draw}/{ngo}', ['uses'=>'DeclarationController@getDeclareNgo_channel_draw_ngo', 'as'=>'declare-ngo-channel-draw-ngo']);
+    Route::post('/declare-ngo/{channel}/{draw}/{ngo}', ['uses'=>'DeclarationController@postDeclareNgo_channel_draw_ngo', 'as'=>'post-declare-ngo']);
+
     ///////////////////////////////////
     //////////// DONATORS /////////////
     ///////////////////////////////////
 
     Route::get('/create-donation/{channel?}', ['uses'=>'DonationController@getCreateDonation', 'as'=>'create-donation']);
     Route::post('/create-donation', ['uses'=>'DonationController@postCreateDonation', 'as'=>'post-create-donation']);
+    Route::get('/donations', ['uses'=>'DonationController@getDonations', 'as'=>'donations']);
     Route::get('/print-donation-slip/{transaction}', ['uses'=>'DonationController@getPrintDonationSlip', 'as'=>'print-donation-slip']);
 
 });

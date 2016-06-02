@@ -9,6 +9,7 @@ use App\Game;
 use App\LuckyRatio;
 use App\Ngo;
 use App\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -116,5 +117,28 @@ class DonationController extends Controller
         } else {
             return redirect()->back()->withInput(Input::all())->with(['error_message' => "Sorry, draw not found, please try again."]);
         }
+    }
+
+    public function getDonations(Request $request) {
+
+        $this->validate($request,[
+            'date' => 'date_format:d-m-Y',
+            'transaction_id' => 'numeric'
+        ], [
+            'date.date_format' => "Input date isn't in valid format (DD-MM-YYYY)",
+            'transaction_id.numeric' => "Transaction ID should be unique numeric value"
+        ]);
+
+        $date = $request->has('date') ? $request->date : Carbon::now()->format('d-m-Y');
+        $db = Auth::user()->isCenter()->transactions()->whereBetween('created_at', [Carbon::parse($date), Carbon::parse($date)->addDay()]);
+        if($request->has('transaction_id')) {
+            $db->where('ref', $request->transaction_id);
+        }
+        $transactions = $db->orderBy('id', 'desc')->paginate(10);
+        return view('donator.donations', [
+            'transactions' => $transactions,
+            "current_date" => $date,
+            "transaction_id" => $request->transaction_id
+        ]);
     }
 }
