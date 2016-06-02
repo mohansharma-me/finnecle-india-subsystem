@@ -14,7 +14,7 @@
                 <form class="pull-right">
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">Draw :</span>
+                            <span class="input-group-addon">Date :</span>
                             <input name="date" type="text" class="form-control" id="donation_datetime" value="{{$current_date}}" />
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">Go</button>
