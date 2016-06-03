@@ -306,6 +306,7 @@ class ComposerStaticInit11d7ff65e00196cc9c1dfacaaf7fe1fb
         'CreateLuckyRatiosTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_052827_create_lucky_ratios_table.php',
         'CreateNgoGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_090810_create_ngo_groups_table.php',
         'CreateNgosTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_091054_create_ngos_table.php',
+        'CreatePaidTransactionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_02_182956_create_paid_transactions_table.php',
         'CreateTransactionsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_30_154129_create_transactions_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_172158_create_users_table.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',

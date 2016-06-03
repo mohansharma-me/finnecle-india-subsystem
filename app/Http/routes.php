@@ -55,6 +55,14 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::get('/donations', ['uses'=>'DonationController@getDonations', 'as'=>'donations']);
     Route::get('/print-donation-slip/{transaction}', ['uses'=>'DonationController@getPrintDonationSlip', 'as'=>'print-donation-slip']);
 
+    ///////////////////////////////////
+    ///////////// CASHIER /////////////
+    ///////////////////////////////////
+
+    Route::get('/check-donation/{transaction}', ['uses'=>'DonationController@getCheckDonation', 'as'=>'check-donation']);
+    Route::post('/check-donation', ['uses'=>'DonationController@postAjaxDonation', 'as'=>'ajax-check-donation']);
+    Route::post('/check-donation/paid', ['uses'=>'DonationController@postPaidDonation', 'as'=>'paid-donation']);
+
 });
 
 Route::get('/setup', function() {

@@ -30,4 +30,15 @@ class Ngo extends Model
             ->sum('donations.amount');
 
     }
+
+    public function ngo_total() {
+
+        $ngo_number = $this->ngo;
+        $value = 0;
+        for($i=0;$i<strlen($ngo_number);$i++) {
+            $value += intval($ngo_number[$i]);
+        }
+        return $value;
+
+    }
 }

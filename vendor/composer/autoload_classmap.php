@@ -17,6 +17,7 @@ return array(
     'CreateLuckyRatiosTable' => $baseDir . '/database/migrations/2016_05_29_052827_create_lucky_ratios_table.php',
     'CreateNgoGroupsTable' => $baseDir . '/database/migrations/2016_05_29_090810_create_ngo_groups_table.php',
     'CreateNgosTable' => $baseDir . '/database/migrations/2016_05_29_091054_create_ngos_table.php',
+    'CreatePaidTransactionsTable' => $baseDir . '/database/migrations/2016_06_02_182956_create_paid_transactions_table.php',
     'CreateTransactionsTable' => $baseDir . '/database/migrations/2016_05_30_154129_create_transactions_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2016_05_26_172158_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

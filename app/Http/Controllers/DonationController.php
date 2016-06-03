@@ -8,20 +8,30 @@ use App\Draw;
 use App\Game;
 use App\LuckyRatio;
 use App\Ngo;
+use App\PaidTransaction;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Prophecy\Doubler\NameGenerator;
+use Symfony\Component\HttpFoundation\Response;
 
 class DonationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('role:donator');
+        $this->middleware('role:donator', [
+            'only' => ['getCreateDonation', 'postCreateDonation', 'getDonations']
+        ]);
+
+        $this->middleware('role:cashier', [
+            'only' => ['getCheckDonation', 'getAjaxDonation']
+        ]);
+
         //$this->middleware('software');
     }
 
@@ -30,9 +40,11 @@ class DonationController extends Controller
         $selected_channel = false;
         $draws = array();
 
+        $current_time = Carbon::now()->format('H:i');
+
         if($channel->exists) {
             $selected_channel = $channel;
-            $draws = $selected_channel->draws->all();
+            $draws = $selected_channel->remainingDraws();
         }
 
         return view('donator.create-donation',[
@@ -140,5 +152,47 @@ class DonationController extends Controller
             "current_date" => $date,
             "transaction_id" => $request->transaction_id
         ]);
+    }
+
+    public function getCheckDonation(Request $request, Transaction $transaction) {
+        return view('cashier.dashboard', ['transaction' => $transaction]);
+    }
+
+    public function postAjaxDonation(Request $request) {
+
+        if($request->has('donation') && $request->isXmlHttpRequest()) {
+            $x_donation = $request->donation;
+            if(is_numeric($x_donation)) {
+                $donation_m = Transaction::find($x_donation);
+                if(isset($donation_m)) {
+                    return response()->json(['success'=>true, 'url'=> route('check-donation', ['transaction'=>$donation_m->id])]);
+                }
+            }
+        }
+
+        return response()->json(['success'=>false]);
+    }
+
+    public function postPaidDonation(Request $request) {
+
+        if($request->has("donation") && $request->isXmlHttpRequest()) {
+            $x_donation = $request->donation;
+            if(is_numeric($x_donation)) {
+                $donation_m = Transaction::find($x_donation);
+
+                if(isset($donation_m)) {
+                    $paid_t = new PaidTransaction();
+                    $paid_t->transaction_id = $donation_m->id;
+                    $paid_t->center_id = Auth::user()->isCenter()->id;
+                    if($paid_t->save()) {
+                        $donation_m->paid = true;
+                        $donation_m->update();
+                        return response()->json(['success'=>true, 'url'=> route('check-donation', ['transaction'=>$donation_m->id])]);
+                    }
+                }
+            }
+        }
+
+        return response()->json(['success'=>false]);
     }
 }

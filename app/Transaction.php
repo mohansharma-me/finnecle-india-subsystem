@@ -16,6 +16,19 @@ class Transaction extends Model
         return $this->donations()->sum('amount');
     }
 
+    public function lucky_amount() {
+        $value = 0;
+
+        foreach($this->donations as $donation) {
+            $arr = $donation->won();
+            if($arr[0]) {
+                $value += intval($arr[1]);
+            }
+        }
+
+        return $value;
+    }
+
     public function ngo_print_string() {
         $ret = "";
         foreach($this->donations as $donation) {
@@ -25,6 +38,10 @@ class Transaction extends Model
             $ret[strlen($ret)-2]=".";
         }
         return $ret;
+    }
+
+    public function declaration() {
+        return $this->belongsTo('\App\Declaration');
     }
 
     public function donations() {
@@ -37,6 +54,14 @@ class Transaction extends Model
 
     public function center() {
         return $this->belongsTo('\App\Center');
+    }
+
+    public function paid_transaction() {
+        return $this->belongsTo('\App\PaidTransaction');
+    }
+
+    public function isPaid() {
+        return $this->paid;
     }
 
     protected static function boot()

@@ -8,6 +8,18 @@
             <h1>Declaration <small>{{Auth::user()->email}}</small> <small class="pull-right">{{\Carbon\Carbon::now()->format("d-m-Y H:i")}}</small> </h1>
             <hr/>
         </div>
+        <div class="col-md-12">
+            @if(session('success_message'))
+                <div class="alert alert-success">
+                    {{session('success_message')}}
+                </div>
+            @endif
+            @if(session('error_message'))
+                <div class="alert alert-danger">
+                    {{session('error_message')}}
+                </div>
+            @endif
+        </div>
     </div>
     <div class="row">
         <div class="col-md-4">
@@ -49,7 +61,7 @@
                     <div class="form-group">
                         <select class="form-control" id="draw">
                             <option style="display:none" disabled selected>Select Draw</option>
-                            @foreach($channel->draws as $draw)
+                            @foreach($sel_channel->remainingDraws() as $draw)
                                 @if(isset($sel_draw) && $sel_draw->id == $draw->id)
                                     <option value="{{$draw->id}}" selected>{{$draw->draw_time}} - {{$draw->name}}</option>
                                 @else
@@ -101,15 +113,25 @@
                                     </tr>
                                     @foreach($game->ngo_groups as $ngo_group)
                                         @foreach($ngo_group->ngos as $ngo)
+                                            <?php
+                                            $current_donation_amount = $ngo->donation_amount($sel_draw->id);
+                                            if($game->id == 2 && $current_donation_amount==0) {
+                                                continue;
+                                            }
+                                            ?>
                                             <tr>
                                                 <td>{{$ngo_group->name}}</td>
                                                 <td>{{$ngo->ngo}}</td>
                                                 <td>{{$ngo->description}}</td>
                                                 <td align="center">
-                                                    Rs. {{$ngo->donation_amount($sel_draw->id)}}/-
+                                                    Rs. {{$current_donation_amount}}/-
                                                 </td>
-                                                <td>
-                                                    <a href="{{route('declare-ngo-channel-draw-ngo', ['channel'=>$sel_channel->id, 'draw'=>$sel_draw->id, 'ngo'=>$ngo->id])}}" class="btn btn-success btn-xs">Declare</a>
+                                                <td class="text-center">
+                                                    @if($game->id > 2)
+                                                        <a href="{{route('declare-ngo-channel-draw-ngo', ['channel'=>$sel_channel->id, 'draw'=>$sel_draw->id, 'ngo'=>$ngo->id])}}" class="btn btn-success btn-xs">Declare</a>
+                                                        @else
+                                                        N/A
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -13,6 +14,11 @@ class Channel extends Model
 
     public function draws() {
         return $this->hasMany('\App\Draw');
+    }
+
+    public function remainingDraws() {
+        $current_time = Carbon::now()->format('H:i');
+        return $this->draws()->whereRaw('time(draw_time) > time(?)', array($current_time))->get();
     }
 
     protected static function boot()

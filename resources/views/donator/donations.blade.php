@@ -64,7 +64,24 @@
                                 <td>{{$transaction->ngo_print_string()}}</td>
                                 <td><label class="label label-default">{{\Carbon\Carbon::parse($transaction->created_at)->format("d-m-Y H:i:s")}}</label><br/>{{$transaction->note}}</td>
                                 <td>
-                                    <label class="label label-{{ $transaction->declaration_id == 0 ? "default" : "primary"  }}">{{ $transaction->declaration_id == 0 ? "Not Declared" : "Declared"  }}</label>
+                                    @if($transaction->declaration_id == 0)
+                                        <label class="label label-default">Not Declared</label>
+                                    @else
+                                        <label class="label label-primary">{{$transaction->declaration->ngo->description}} declared</label>
+                                        <?php
+                                        $total_won = 0;
+                                        ?>
+                                        @foreach($transaction->donations as $donation)
+                                            @if($won_arr = $donation->won())
+                                                @if($won_arr[0])
+                                                    <?php
+                                                    $total_won += intval($won_arr[1]);
+                                                    ?>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                        <label class="label label-{{$total_won > 0 ? "success" : "danger"}}"><b>Rs. {{$total_won}}/-</b></label>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
