@@ -163,7 +163,7 @@ class DonationController extends Controller
         if($request->has('donation') && $request->isXmlHttpRequest()) {
             $x_donation = $request->donation;
             if(is_numeric($x_donation)) {
-                $donation_m = Transaction::where('ref',$x_donation)->first();
+                $donation_m = Transaction::find($x_donation);
                 if(isset($donation_m)) {
                     return response()->json(['success'=>true, 'url'=> route('check-donation', ['transaction'=>$donation_m->id])]);
                 }
@@ -179,6 +179,7 @@ class DonationController extends Controller
             $x_donation = $request->donation;
             if(is_numeric($x_donation)) {
                 $donation_m = Transaction::find($x_donation);
+
                 if(isset($donation_m)) {
                     $paid_t = new PaidTransaction();
                     $paid_t->transaction_id = $donation_m->id;
