@@ -46,6 +46,10 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::get('/declare-ngo/{channel}/{draw}/{ngo}', ['uses'=>'DeclarationController@getDeclareNgo_channel_draw_ngo', 'as'=>'declare-ngo-channel-draw-ngo']);
     Route::post('/declare-ngo/{channel}/{draw}/{ngo}', ['uses'=>'DeclarationController@postDeclareNgo_channel_draw_ngo', 'as'=>'post-declare-ngo']);
 
+    // Clear Requests
+    Route::get('/clear-request/accept/{clearRequest}', ['uses'=>"ClearRequestController@getAcceptRequest", "as"=>'accept-clear-request']);
+    Route::get('/clear-request/reject/{clearRequest}', ['uses'=>"ClearRequestController@getRejectRequest", "as"=>'reject-clear-request']);
+
     ///////////////////////////////////
     //////////// DONATORS /////////////
     ///////////////////////////////////
@@ -54,6 +58,7 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::post('/create-donation', ['uses'=>'DonationController@postCreateDonation', 'as'=>'post-create-donation']);
     Route::get('/donations', ['uses'=>'DonationController@getDonations', 'as'=>'donations']);
     Route::get('/print-donation-slip/{transaction}', ['uses'=>'DonationController@getPrintDonationSlip', 'as'=>'print-donation-slip']);
+    Route::post('/clear-request', ['uses'=>'DonationController@postClearRequest', 'as'=>'post-clear-request']);
 
     ///////////////////////////////////
     ///////////// CASHIER /////////////
@@ -62,6 +67,8 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::get('/check-donation/{transaction}', ['uses'=>'DonationController@getCheckDonation', 'as'=>'check-donation']);
     Route::post('/check-donation', ['uses'=>'DonationController@postAjaxDonation', 'as'=>'ajax-check-donation']);
     Route::post('/check-donation/paid', ['uses'=>'DonationController@postPaidDonation', 'as'=>'paid-donation']);
+    Route::get('/cashier/clear-requests', ['uses'=>'DonationController@getCashierClearRequests', 'as'=>'cashier-clear-requests']);
+    Route::post('/cashier/clear-request', ['uses'=>'DonationController@postCashierClearRequest', 'as'=>'post-cashier-clear-request']);
 
 });
 

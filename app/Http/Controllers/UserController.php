@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClearRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
@@ -69,7 +70,22 @@ class UserController extends Controller
     public function getDashboard() {
         $dashboardViewName = Auth::user()->getRole('dashboard');
         if(view()->exists($dashboardViewName)) {
-            return view($dashboardViewName);
+
+            $data = [];
+
+            switch(Auth::user()->role) {
+                case "donator":
+                    $data["clear_requests"] = Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30);
+                    break;
+                case "admin":
+                    $data["clear_requests"] = ClearRequest::orderBy('id', 'desc')->paginate(30);
+                    break;
+                case "cashier":
+                    $data["clear_requests"] = Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30);
+                    break;
+            }
+
+            return view($dashboardViewName, $data);
         } else {
             return view('errors.role_not_found');
         }

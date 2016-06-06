@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionsTable extends Migration
+class CreateClearRequestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,13 @@ class CreateTransactionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('clear_requests', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('ref');
-            $table->integer('draw_id');
             $table->integer('center_id');
-            $table->boolean('paid');
-            $table->double('center_commission');
-            $table->string('note');
-            $table->integer('clear_request_id')->default(0);
+            $table->double('amount');
+            $table->integer('slips');
+            $table->string('status');
 
             $table->softDeletes();
             $table->timestamps();
@@ -35,6 +32,6 @@ class CreateTransactionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('transactions');
+        Schema::drop('clear_requests');
     }
 }

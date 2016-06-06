@@ -2,8 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfd31d9e-7f14-41cd-9e75-63444fee2602" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/views/cashier/requests.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Center.php" afterPath="$PROJECT_DIR$/app/Center.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DonationController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DonationController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/User.php" afterPath="$PROJECT_DIR$/app/User.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2016_05_30_154129_create_transactions_table.php" afterPath="$PROJECT_DIR$/database/migrations/2016_05_30_154129_create_transactions_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/cashier/nav.blade.php" afterPath="$PROJECT_DIR$/resources/views/cashier/nav.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/donator/dashboard.blade.php" afterPath="$PROJECT_DIR$/resources/views/donator/dashboard.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
     </list>
     <ignored path="finnecle-branch.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +40,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
-              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="481">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -38,89 +50,71 @@
       <file leaf-file-name="DonationController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DonationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="175" column="56" selection-start-line="175" selection-start-column="56" selection-end-line="175" selection-end-column="56" />
-              <folding>
-                <element signature="e#844#1409#0#PHP" expanded="false" />
-                <element signature="e#1049#1181#0#PHP" expanded="false" />
-                <element signature="e#1198#1402#0#PHP" expanded="false" />
-                <element signature="e#1229#1401#0#PHP" expanded="false" />
-                <element signature="e#1415#5054#0#PHP" expanded="false" />
-                <element signature="e#1478#1557#0#PHP" expanded="false" />
-                <element signature="e#1504#1556#0#PHP" expanded="false" />
-                <element signature="e#1641#5048#0#PHP" expanded="false" />
-                <element signature="e#1665#4886#0#PHP" expanded="false" />
-                <element signature="e#1810#1975#0#PHP" expanded="false" />
-                <element signature="e#1993#2341#0#PHP" expanded="false" />
-                <element signature="e#2096#2323#0#PHP" expanded="false" />
-                <element signature="e#2130#2323#0#PHP" expanded="false" />
-                <element signature="e#2785#4700#0#PHP" expanded="false" />
-                <element signature="e#3113#4031#0#PHP" expanded="false" />
-                <element signature="e#3682#4009#0#PHP" expanded="false" />
-                <element signature="e#3758#4009#0#PHP" expanded="false" />
-                <element signature="e#4185#4493#0#PHP" expanded="false" />
-                <element signature="e#4210#4492#1#PHP" expanded="false" />
-                <element signature="e#4514#4700#0#PHP" expanded="false" />
-                <element signature="e#4715#4886#0#PHP" expanded="false" />
-                <element signature="e#4897#5048#0#PHP" expanded="false" />
-                <element signature="e#5118#5424#0#PHP" expanded="false" />
-                <element signature="e#5143#5239#0#PHP" expanded="false" />
-                <element signature="e#5241#5423#0#PHP" expanded="false" />
-                <element signature="e#5850#6027#0#PHP" expanded="false" />
-                <element signature="e#5876#6026#0#PHP" expanded="false" />
-              </folding>
+            <state relative-caret-position="583">
+              <caret line="288" column="0" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="donations.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/donator/donations.blade.php">
+      <file leaf-file-name="requests.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/cashier/requests.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="79" column="54" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="54" />
+            <state relative-caret-position="357">
+              <caret line="84" column="18" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="User.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/User.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="651">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2016_06_02_182956_create_paid_transactions_table.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_02_182956_create_paid_transactions_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Center.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Center.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="362">
+              <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="dashboard.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/cashier/dashboard.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/donator/dashboard.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2295">
-              <caret line="135" column="18" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+            <state relative-caret-position="1122">
+              <caret line="102" column="180" selection-start-line="102" selection-start-column="180" selection-end-line="102" selection-end-column="180" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="83" column="125" selection-start-line="83" selection-start-column="46" selection-end-line="83" selection-end-column="125" />
               <folding>
-                <marker date="1464922849335" expanded="true" signature="3139:4354" placeholder="..." />
+                <element signature="e#40#61#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Transaction.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Transaction.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ngo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Ngo.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Declaration.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Declaration.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -140,20 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/css/pace2.css" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/master.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_05_30_154129_create_transactions_table.php" />
-        <option value="$PROJECT_DIR$/app/Http/Kernel.php" />
-        <option value="$PROJECT_DIR$/resources/views/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Middleware/SoftwareMiddleware.php" />
-        <option value="$PROJECT_DIR$/public/css/style.css" />
-        <option value="$PROJECT_DIR$/app/User.php" />
-        <option value="$PROJECT_DIR$/app/Lib/Lib.php" />
-        <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGenerator.php" />
-        <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/BarcodeException.php" />
-        <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidCharacterException.php" />
-        <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidCheckDigitException.php" />
-        <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidFormatException.php" />
         <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidLengthException.php" />
         <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/UnknownTypeException.php" />
         <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGeneratorHTML.php" />
@@ -162,7 +142,6 @@
         <option value="$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGeneratorSVG.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_05_29_091054_create_ngos_table.php" />
         <option value="$PROJECT_DIR$/resources/views/donator/create-donation.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/donator/dashboard.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/donator/nav.blade.php" />
         <option value="$PROJECT_DIR$/public/js/moment.min.js" />
         <option value="$PROJECT_DIR$/public/js/bootstrap-datetimepicker.min.js" />
@@ -182,15 +161,30 @@
         <option value="$PROJECT_DIR$/app/Ngo.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DeclarationController.php" />
         <option value="$PROJECT_DIR$/resources/views/donator/donations.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/cashier/nav.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2016_06_02_182956_create_paid_transactions_table.php" />
         <option value="$PROJECT_DIR$/app/PaidTransaction.php" />
-        <option value="$PROJECT_DIR$/app/Center.php" />
         <option value="$PROJECT_DIR$/app/Donation.php" />
-        <option value="$PROJECT_DIR$/app/Transaction.php" />
-        <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/cashier/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/app/ClearTransaction.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_05_071018_create_clear_transactions_table.php" />
+        <option value="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_05_30_154129_create_transactions_table.php" />
+        <option value="$PROJECT_DIR$/app/Transaction.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_05_063500_create_clear_requests_table.php" />
+        <option value="$PROJECT_DIR$/app/ClearRequest.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/ClearRequestController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/donator/dashboard.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/UserController.php" />
+        <option value="$PROJECT_DIR$/resources/views/cashier/nav.blade.php" />
+        <option value="$PROJECT_DIR$/app/Center.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_06_172214_add_clear_request_id_relation_column_to_paid_transaction.php" />
+        <option value="$PROJECT_DIR$/resources/views/cashier/requests.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_02_182956_create_paid_transactions_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2016_06_06_173203_add_commission_column_to_paid_transaction.php" />
+        <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DonationController.php" />
+        <option value="$PROJECT_DIR$/config/app.php" />
       </list>
     </option>
   </component>
@@ -406,6 +400,28 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finnecle-branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finnecle-branch" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="public" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -452,6 +468,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finnecle-branch" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="finnecle-branch" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -474,46 +504,6 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="finnecle-branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="finnecle-branch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="finnecle-branch" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="finnecle-branch" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -528,15 +518,15 @@
     <property name="list.type.of.created.stylesheet" value="CSS" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\htdocs\finnecle-branch\resources\views\admin\declaration" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\htdocs\finnecle-branch\resources\views\cashier" />
       <recent name="G:\htdocs\finnecle-branch\resources\views\admin\declaration" />
       <recent name="G:\htdocs\finnecle-branch\resources\views\admin" />
       <recent name="G:\htdocs\finnecle-branch\resources\views\donator" />
       <recent name="G:\htdocs\finnecle-branch\app\Lib" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\htdocs\finnecle-branch\resources\views\admin\declaration" />
     </key>
   </component>
   <component name="RunManager">
@@ -597,15 +587,18 @@
       <workItem from="1464878768383" duration="15695000" />
       <workItem from="1464922336067" duration="1076000" />
       <workItem from="1465051476544" duration="14000" />
-      <workItem from="1465100873771" duration="1251000" />
+      <workItem from="1465100873771" duration="7984000" />
+      <workItem from="1465124870555" duration="28000" />
+      <workItem from="1465133434187" duration="6053000" />
+      <workItem from="1465226029164" duration="7147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129098000" />
+    <option name="totallyTimeSpent" value="149059000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1096" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -645,91 +638,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Game.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="35" column="25" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/NgoGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/Lib.php" />
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidCharacterException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidCheckDigitException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidFormatException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/UnknownTypeException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="46" selection-start-line="2" selection-start-column="46" selection-end-line="2" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/InvalidLengthException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="36" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/Exceptions/BarcodeException.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGenerator.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGeneratorHTML.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGeneratorJPG.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Lib/BarcodeGenerator/BarcodeGeneratorPNG.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -765,20 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="70" column="48" selection-start-line="70" selection-start-column="48" selection-end-line="70" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/donator/nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="136" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/moment.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -793,13 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/donator/dashboard.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/bootstrap-datetimepicker.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -811,20 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -895,7 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,35 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/cashier/nav.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Center.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/PaidTransaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="47" selection-start-line="18" selection-start-column="47" selection-end-line="18" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_02_182956_create_paid_transactions_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="18" column="41" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -963,73 +806,208 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Transaction.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/donator/donations.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1343">
-          <caret line="79" column="54" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="54" />
+        <state relative-caret-position="952">
+          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/donator/nav.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="136" selection-start-line="1" selection-start-column="136" selection-end-line="1" selection-end-column="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_05_071018_create_clear_transactions_table.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_static.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="301" column="132" selection-start-line="301" selection-start-column="132" selection-end-line="301" selection-end-column="132" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ClearTransaction.php" />
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_05_30_154129_create_transactions_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="15" column="49" selection-start-line="15" selection-start-column="49" selection-end-line="16" selection-end-column="5" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/CenterController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        <state relative-caret-position="187">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/ClearRequest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClearRequestController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="33" column="100" selection-start-line="33" selection-start-column="100" selection-end-line="33" selection-end-column="100" />
+          <folding>
+            <element signature="e#40#61#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="48" column="62" selection-start-line="48" selection-start-column="62" selection-end-line="48" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/donator/dashboard.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="102" column="180" selection-start-line="102" selection-start-column="180" selection-end-line="102" selection-end-column="180" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/nav.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/cashier/dashboard.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2295">
-          <caret line="135" column="18" selection-start-line="135" selection-start-column="18" selection-end-line="135" selection-end-column="18" />
+        <state relative-caret-position="1428">
+          <caret line="84" column="29" selection-start-line="84" selection-start-column="29" selection-end-line="84" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/cashier/nav.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="158" selection-start-line="0" selection-start-column="158" selection-end-line="0" selection-end-column="158" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/PaidTransaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Center.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="83" column="125" selection-start-line="83" selection-start-column="46" selection-end-line="83" selection-end-column="125" />
           <folding>
-            <marker date="1464922849335" expanded="true" signature="3139:4354" placeholder="..." />
+            <element signature="e#40#61#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_05_063500_create_clear_requests_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+          <folding>
+            <element signature="e#7#48#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/cashier/requests.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="84" column="18" selection-start-line="84" selection-start-column="18" selection-end-line="84" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_06_172214_add_clear_request_id_relation_column_to_paid_transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="16" selection-end-column="11" />
+          <folding>
+            <element signature="e#7#48#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_02_182956_create_paid_transactions_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="6" selection-start-line="27" selection-start-column="6" selection-end-line="27" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2016_06_06_173203_add_commission_column_to_paid_transaction.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="52" selection-start-line="27" selection-start-column="52" selection-end-line="27" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="54" column="31" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/DonationController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="175" column="56" selection-start-line="175" selection-start-column="56" selection-end-line="175" selection-end-column="56" />
-          <folding>
-            <element signature="e#844#1409#0#PHP" expanded="false" />
-            <element signature="e#1049#1181#0#PHP" expanded="false" />
-            <element signature="e#1198#1402#0#PHP" expanded="false" />
-            <element signature="e#1229#1401#0#PHP" expanded="false" />
-            <element signature="e#1415#5054#0#PHP" expanded="false" />
-            <element signature="e#1478#1557#0#PHP" expanded="false" />
-            <element signature="e#1504#1556#0#PHP" expanded="false" />
-            <element signature="e#1641#5048#0#PHP" expanded="false" />
-            <element signature="e#1665#4886#0#PHP" expanded="false" />
-            <element signature="e#1810#1975#0#PHP" expanded="false" />
-            <element signature="e#1993#2341#0#PHP" expanded="false" />
-            <element signature="e#2096#2323#0#PHP" expanded="false" />
-            <element signature="e#2130#2323#0#PHP" expanded="false" />
-            <element signature="e#2785#4700#0#PHP" expanded="false" />
-            <element signature="e#3113#4031#0#PHP" expanded="false" />
-            <element signature="e#3682#4009#0#PHP" expanded="false" />
-            <element signature="e#3758#4009#0#PHP" expanded="false" />
-            <element signature="e#4185#4493#0#PHP" expanded="false" />
-            <element signature="e#4210#4492#1#PHP" expanded="false" />
-            <element signature="e#4514#4700#0#PHP" expanded="false" />
-            <element signature="e#4715#4886#0#PHP" expanded="false" />
-            <element signature="e#4897#5048#0#PHP" expanded="false" />
-            <element signature="e#5118#5424#0#PHP" expanded="false" />
-            <element signature="e#5143#5239#0#PHP" expanded="false" />
-            <element signature="e#5241#5423#0#PHP" expanded="false" />
-            <element signature="e#5850#6027#0#PHP" expanded="false" />
-            <element signature="e#5876#6026#0#PHP" expanded="false" />
-          </folding>
+        <state relative-caret-position="583">
+          <caret line="288" column="0" selection-start-line="288" selection-start-column="0" selection-end-line="288" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

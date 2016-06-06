@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\ClearRequest;
 use App\Donation;
 use App\Draw;
 use App\Game;
@@ -25,11 +26,11 @@ class DonationController extends Controller
     public function __construct()
     {
         $this->middleware('role:donator', [
-            'only' => ['getCreateDonation', 'postCreateDonation', 'getDonations']
+            'only' => ['getCreateDonation', 'postCreateDonation', 'getDonations', 'postClearRequest']
         ]);
 
         $this->middleware('role:cashier', [
-            'only' => ['getCheckDonation', 'getAjaxDonation']
+            'only' => ['getCheckDonation', 'getAjaxDonation', 'postPaidDonation']
         ]);
 
         //$this->middleware('software');
@@ -183,6 +184,7 @@ class DonationController extends Controller
                     $paid_t = new PaidTransaction();
                     $paid_t->transaction_id = $donation_m->id;
                     $paid_t->center_id = Auth::user()->isCenter()->id;
+                    $paid_t->center_commission = Auth::user()->isCenter()->commission_ratio;
                     if($paid_t->save()) {
                         $donation_m->paid = true;
                         $donation_m->update();
@@ -194,4 +196,103 @@ class DonationController extends Controller
 
         return response()->json(['success'=>false]);
     }
+
+    public function postClearRequest(Request $request) {
+
+        if($request->has("t")) {
+
+            $t = $request["t"];
+            $transactions = Transaction::whereIn("id", $t)->get();
+
+            if(count($t) == count($transactions)) {
+
+                $sumAmount = 0;
+                foreach($transactions as $transaction) {
+                    $tr_amount = $transaction->amount();
+                    $sumAmount += $tr_amount - ($tr_amount * $transaction->center_commission / 100);
+                }
+
+                $clearRequest = new ClearRequest();
+                $clearRequest->center_id = Auth::user()->isCenter()->id;
+                $clearRequest->amount = $sumAmount;
+                $clearRequest->status = "pending";
+                $clearRequest->slips = count($transactions);
+
+                if($clearRequest->save()) {
+
+                    foreach($transactions as $transaction) {
+                        $transaction->clear_request_id = $clearRequest->id;
+                        $transaction->update();
+                    }
+
+                    return redirect()->back()->with(['success_message'=>"Clear request is successfully sent!"]);
+
+                } else {
+                    return redirect()->back()->with(['error_message'=>"There was an error while requesting new clear request, try again."]);
+                }
+
+            } else {
+                return redirect()->back()->with(['error_message'=>"Request transaction(s) are missing or already in process, try again"]);
+            }
+
+        } else {
+            return redirect()->back()->with(['error_message'=>"Request isn't valid, try again"]);
+        }
+
+        return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
+
+    }
+
+    public function postCashierClearRequest(Request $request) {
+
+        if($request->has("t")) {
+
+            $t = $request["t"];
+            $transactions = PaidTransaction::whereIn("id", $t)->get();
+
+            if(count($t) == count($transactions)) {
+
+                $sumAmount = 0;
+                foreach($transactions as $transaction) {
+                    $tr_amount = $transaction->transaction->amount();
+                    $sumAmount += $tr_amount - ($tr_amount * $transaction->center_commission / 100);
+                }
+
+                $clearRequest = new ClearRequest();
+                $clearRequest->center_id = Auth::user()->isCenter()->id;
+                $clearRequest->amount = $sumAmount;
+                $clearRequest->status = "pending";
+                $clearRequest->slips = count($transactions);
+
+                if($clearRequest->save()) {
+
+                    foreach($transactions as $transaction) {
+                        $transaction->clear_request_id = $clearRequest->id;
+                        $transaction->update();
+                    }
+
+                    return redirect()->back()->with(['success_message'=>"Clear request is successfully sent!"]);
+
+                } else {
+                    return redirect()->back()->with(['error_message'=>"There was an error while requesting new clear request, try again."]);
+                }
+
+            } else {
+                return redirect()->back()->with(['error_message'=>"Request transaction(s) are missing or already in process, try again"]);
+            }
+
+        } else {
+            return redirect()->back()->with(['error_message'=>"Request isn't valid, try again"]);
+        }
+
+        return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
+
+    }
+
+    public function getCashierClearRequests() {
+        return view('cashier.requests', [
+            'clear_requests' => Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30)
+        ]);
+    }
+
 }

@@ -6,10 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddClearRequestIdRelationColumnToPaidTransaction' => $baseDir . '/database/migrations/2016_06_06_172214_add_clear_request_id_relation_column_to_paid_transaction.php',
+    'AddCommissionColumnToPaidTransaction' => $baseDir . '/database/migrations/2016_06_06_173203_add_commission_column_to_paid_transaction.php',
     'AddUserTypeColumn' => $baseDir . '/database/migrations/2016_05_26_183255_add_user_type_column.php',
     'AddWonColumnInDonation' => $baseDir . '/database/migrations/2016_06_01_174613_add_won_column_in_donation.php',
     'CreateCentersTable' => $baseDir . '/database/migrations/2016_05_28_190809_create_centers_table.php',
     'CreateChannelsTable' => $baseDir . '/database/migrations/2016_05_27_170407_create_channels_table.php',
+    'CreateClearRequestsTable' => $baseDir . '/database/migrations/2016_06_05_063500_create_clear_requests_table.php',
     'CreateDeclarationsTable' => $baseDir . '/database/migrations/2016_06_01_180502_create_declarations_table.php',
     'CreateDonationsTable' => $baseDir . '/database/migrations/2016_05_30_154140_create_donations_table.php',
     'CreateDrawsTable' => $baseDir . '/database/migrations/2016_05_28_160456_create_draws_table.php',

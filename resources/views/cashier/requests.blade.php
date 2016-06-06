@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('title', "Dashboard")
+@section('title', "Clear Requests")
 
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <h1>Dashboard <small>{{Auth::user()->email}}</small></h1>
+            <h1>Clear Requests <small>{{Auth::user()->email}}</small></h1>
             <hr/>
         </div>
     </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <form method="post" class="well" action="{{route('post-clear-request')}}">
+            <form method="post" class="well" action="{{route('post-cashier-clear-request')}}">
                 <?php
                 $clearAmount = Auth::user()->getUnclearAmount();
                 ?>

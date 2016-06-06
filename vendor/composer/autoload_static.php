@@ -295,10 +295,13 @@ class ComposerStaticInit11d7ff65e00196cc9c1dfacaaf7fe1fb
     );
 
     public static $classMap = array (
+        'AddClearRequestIdRelationColumnToPaidTransaction' => __DIR__ . '/../..' . '/database/migrations/2016_06_06_172214_add_clear_request_id_relation_column_to_paid_transaction.php',
+        'AddCommissionColumnToPaidTransaction' => __DIR__ . '/../..' . '/database/migrations/2016_06_06_173203_add_commission_column_to_paid_transaction.php',
         'AddUserTypeColumn' => __DIR__ . '/../..' . '/database/migrations/2016_05_26_183255_add_user_type_column.php',
         'AddWonColumnInDonation' => __DIR__ . '/../..' . '/database/migrations/2016_06_01_174613_add_won_column_in_donation.php',
         'CreateCentersTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_28_190809_create_centers_table.php',
         'CreateChannelsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_27_170407_create_channels_table.php',
+        'CreateClearRequestsTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_05_063500_create_clear_requests_table.php',
         'CreateDeclarationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_01_180502_create_declarations_table.php',
         'CreateDonationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_30_154140_create_donations_table.php',
         'CreateDrawsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_28_160456_create_draws_table.php',
