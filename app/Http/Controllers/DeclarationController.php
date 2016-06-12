@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Declaration;
+use App\Donation;
 use App\Draw;
 use App\Game;
+use App\Http\Requests;
 use App\Ngo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 class DeclarationController extends Controller
@@ -37,11 +37,14 @@ class DeclarationController extends Controller
 
         $games = Game::all();
 
+        $totalDonations = Donation::totalDonation($draw->id);
+
         return view('admin.declaration.index', [
             'channels' => Channel::all(),
             'sel_channel' => $channel,
             'sel_draw' =>  $draw,
-            'games' => $games
+            'games' => $games,
+            'totalDonationAmount' => $totalDonations
         ]);
     }
 
@@ -77,20 +80,20 @@ class DeclarationController extends Controller
             /// WINNING LOGIC START //////////////
             //////////////////////////////////////
 
-            echo '<pre>';
-            foreach($declaration->transactions as $transaction) {
-                foreach($transaction->donations as $donation) {
-                    list($status, $amount) = $donation->won();
-                    //echo ($status?'t':'f').", $amount == ".$donation->id."<br/>";
-                }
-            }
-            echo '</pre>';
+            // echo '<pre>';
+            // foreach($declaration->transactions as $transaction) {
+            //     foreach($transaction->donations as $donation) {
+            //         list($status, $amount) = $donation->won();
+            //         //echo ($status?'t':'f').", $amount == ".$donation->id."<br/>";
+            //     }
+            // }
+            // echo '</pre>';
 
             //////////////////////////////////////
             /// WINNING LOGIC END ////////////////
             //////////////////////////////////////
 
-            //return redirect()->route('declare-ngo')->with(['success_message'=>"Declaration completed"]);
+            return redirect()->route('declare-ngo')->with(['success_message'=>"Declaration completed"]);
 
         } else {
             return redirect()->back()->with(['error_message'=>"There was an error, please try again."]);

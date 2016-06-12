@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Donation extends Model
 {
@@ -19,7 +20,17 @@ class Donation extends Model
         return $this->belongsTo('\App\Ngo');
     }
 
-    
+    public static function totalDonation($draw_id) {
+        $first = DB::table('transactions')
+            ->where('transactions.declaration_id',0)
+            ->where('transactions.draw_id', $draw_id)
+            ->join('donations', 'donations.transaction_id', '=', 'transactions.id')
+            //->where('donations.ngo_id', $this->id)
+            //->select()
+            ->sum('donations.amount');
+
+        return $first;
+    }
 
     public function won() {
 

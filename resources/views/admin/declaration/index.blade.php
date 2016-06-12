@@ -93,53 +93,46 @@
     @if(isset($sel_channel, $sel_draw))
         <div class="row">
             <div class="col-md-12">
-                <div>
-                    <legend>NGOs</legend>
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover">
-                            @foreach($games as $game)
-                                <thead>
-                                    <tr>
-                                        <th colspan="5" class="info">{{$game->name}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="active">
-                                        <th width="10%">Group</th>
-                                        <th width="10%">NGO</th>
-                                        <th>Description</th>
-                                        <th width="10%">Donation</th>
-                                        <th width="10%">Action</th>
-                                    </tr>
-                                    @foreach($game->ngo_groups as $ngo_group)
-                                        @foreach($ngo_group->ngos as $ngo)
-                                            <?php
-                                            $current_donation_amount = $ngo->donation_amount($sel_draw->id);
-                                            if($game->id == 2 && $current_donation_amount==0) {
-                                                continue;
-                                            }
-                                            ?>
-                                            <tr>
-                                                <td>{{$ngo_group->name}}</td>
-                                                <td>{{$ngo->ngo}}</td>
-                                                <td>{{$ngo->description}}</td>
-                                                <td align="center">
-                                                    Rs. {{$current_donation_amount}}/-
-                                                </td>
-                                                <td class="text-center">
-                                                    @if($game->id > 2)
-                                                        <a href="{{route('declare-ngo-channel-draw-ngo', ['channel'=>$sel_channel->id, 'draw'=>$sel_draw->id, 'ngo'=>$ngo->id])}}" class="btn btn-success btn-xs">Declare</a>
-                                                        @else
-                                                        N/A
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+                <div class="well">
+                    <legend>Total Donation : <label class='pull-right'>Rs. {{$totalDonationAmount}}/-</label></legend>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <?php $firstFlag = true; ?>
+                    @foreach($games as $game)
+                        @if($firstFlag)
+                            <li class="active"><a href="#tab{{$game->id}}" data-toggle="tab">{{$game->name}}</a></li>
+                        @else
+                            <li><a href="#tab{{$game->id}}"  data-toggle="tab">{{$game->name}}</a></li>
+                        @endif
+                        <?php $firstFlag = false; ?>
+                    @endforeach
+                </ul>
+                <div id="myTabContent" class="tab-content">
+                    <?php $firstFlag = true; ?>
+                    @foreach($games as $game)
+                        <div class="tab-pane fade {{ $firstFlag ? "active in" : "" }}" id="tab{{$game->id}}" style="padding: 10px 15px">
+                            <div class="row">
+                                @foreach($game->ngo_groups as $ngo_group)
+                                    @foreach($ngo_group->ngos as $ngo)
+                                        <div class="col-xs-6 col-md-2">
+                                            <div class="thumbnail text-center">
+                                                <h4 class="caption">NGO {{$ngo->ngo}}</h4>
+                                                <p>Donation : Rs. {{$ngo->donation_amount($sel_draw->id)}}/-</p>
+                                                <p>Return : Rs. {{$ngo->return_amount($sel_draw->id)}}/-</p>
+                                                <p>Commission : Rs. {{$ngo->return_commission_amount($sel_draw->id)}}/-</p>
+                                                @if($game->id > 2)
+                                                <p><a href="{{route('declare-ngo-channel-draw-ngo', ['channel'=>$sel_channel->id, 'draw'=>$sel_draw->id, 'ngo'=>$ngo->id])}}" class="btn btn-xs btn-success">Declare</a></p>
+                                                @endif
+                                            </div>
+                                        </div>
                                     @endforeach
-                                </tbody>
-                            @endforeach
-                        </table>
-                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <?php $firstFlag = false; ?>
+                    @endforeach
                 </div>
             </div>
         </div>
