@@ -20,8 +20,12 @@ class Donation extends Model
         return $this->belongsTo('\App\Ngo');
     }
 
-    public static function totalDonation($draw_id) {
+    public static function totalDonation($draw_id, $created_at = null) {
+        if(!isset($created_at)) {
+            $created_at = \Carbon\Carbon::now();
+        }
         $first = DB::table('transactions')
+            ->whereDate('transactions.created_at', '=', $created_at->format('Y-m-d'))
             ->where('transactions.declaration_id',0)
             ->where('transactions.draw_id', $draw_id)
             ->join('donations', 'donations.transaction_id', '=', 'transactions.id')

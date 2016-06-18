@@ -7,8 +7,10 @@ use App\Declaration;
 use App\Donation;
 use App\Draw;
 use App\Game;
+use App\GeneralSetting;
 use App\Http\Requests;
 use App\Ngo;
+use App\NgoGroup;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -38,13 +40,26 @@ class DeclarationController extends Controller
         $games = Game::all();
 
         $totalDonations = Donation::totalDonation($draw->id);
+        $totalDonatorComm = 0;
+        $totalCashierComm = 0;
+
+        $ngoGroups = NgoGroup::all();
+        foreach($ngoGroups as $ngoGroup) {
+            foreach($ngoGroup->ngos as $ngo) {
+                $returnAmount = $ngo->return_amount($draw->id);
+                $totalCashierComm += ($returnAmount * GeneralSetting::settings()->cashier_commission_ratio / 100);
+                $totalDonatorComm += $ngo->return_commission_amount($draw->id);
+            }
+        }
 
         return view('admin.declaration.index', [
             'channels' => Channel::all(),
             'sel_channel' => $channel,
             'sel_draw' =>  $draw,
             'games' => $games,
-            'totalDonationAmount' => $totalDonations
+            'totalDonationAmount' => $totalDonations,
+            'totalDonatorComm' => $totalDonatorComm,
+            'totalCashierComm' => $totalCashierComm
         ]);
     }
 
@@ -92,6 +107,9 @@ class DeclarationController extends Controller
             //////////////////////////////////////
             /// WINNING LOGIC END ////////////////
             //////////////////////////////////////
+
+            $declaration->status = 'completed';
+            $declaration->update();
 
             return redirect()->route('declare-ngo')->with(['success_message'=>"Declaration completed"]);
 

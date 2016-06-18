@@ -16,6 +16,17 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::get('/', [ 'uses'=>'UserController@getDashboard', 'as'=>'dashboard']);
     Route::get('/logout', ['uses'=>'UserController@getLogout', 'as'=>'logout']);
 
+    // Settings
+    Route::get('/settings', ['uses'=>'GeneralSettingController@getIndex', 'as'=>'general-settings']);
+    Route::post('/settings', ['uses'=>'GeneralSettingController@postSaveSettings', 'as'=>'general-settings-post']);
+
+    // Reports
+    Route::group(['prefix'=>'reports', 'namespace'=>'ReportControllers'], function() {
+        Route::get('/declarations', ['uses'=>'DeclarationReportController@getIndex', 'as'=>'reports-declarations']);
+        Route::get('/paid-transactions', ['uses'=>'PaidTransactionReportController@getIndex', 'as'=>'reports-paid-transactions']);
+        Route::get('/donations', ['uses'=>'DonationReportController@getIndex', 'as'=>'reports-donations']);
+    });
+
     // Channels
     Route::get('/channels', ['uses'=>'ChannelController@getIndex', 'as'=>'channels']);
     Route::post('/channels/new', ['uses'=>'ChannelController@postNewChannel', 'as'=>'create-new-channel']);
@@ -69,11 +80,12 @@ Route::group(['middleware'=>['auth'], 'prefix'=>'dashboard'], function() {
     Route::post('/check-donation/paid', ['uses'=>'DonationController@postPaidDonation', 'as'=>'paid-donation']);
     Route::get('/cashier/clear-requests', ['uses'=>'DonationController@getCashierClearRequests', 'as'=>'cashier-clear-requests']);
     Route::post('/cashier/clear-request', ['uses'=>'DonationController@postCashierClearRequest', 'as'=>'post-cashier-clear-request']);
+    Route::get('/cashier/paid-transactions', ['uses'=>"DonationController@getCashierPaidDonations", "as"=>"cashier-paid-donations"]);
 
 });
 
 Route::get('/setup', function() {
-
+    return Illuminate\Support\Facades\DB::select(Illuminate\Support\Facades\DB::raw("select * from users"));
 });
 
 Route::group(['prefix'=>'api'], function() {

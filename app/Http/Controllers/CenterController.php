@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Center;
 use App\Game;
+use App\GeneralSetting;
+use App\Http\Requests;
 use App\LuckyRatio;
 use App\User;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 
 class CenterController extends Controller
@@ -30,10 +30,9 @@ class CenterController extends Controller
 
         $validation_array = array(
             'type'=>'required|in:donator,cashier',
-            'name'=>'required|alpha_dash',
+            'name'=>'required',
             'email'=>'required|email|unique:users',
-            'password'=>'required|min:5',
-            'commission_ratio'=>'required|numeric'
+            'password'=>'required|min:5'
         );
 
         $validation_messages = array();
@@ -41,20 +40,23 @@ class CenterController extends Controller
         $game = $request["game"];
         $ratios = array();
 
-        if(is_array($game)) {
-            foreach($game as $game_id=>$ratio) {
-                $validation_array["game.$game_id"]="required|numeric";
-                $game_m = Game::find($game_id);
-                if(!$game_m) {
-                    return redirect()->back()->with(['error_message'=>"Invalid game, try again"]);
-                }
-                $validation_messages["game.$game_id.required"] = "The ".$game_m->name." lucky ratio is required";
-                $validation_messages["game.$game_id.numeric"]  = "The ".$game_m->name." lucky ratio is invalid (it must be an number)";
+        if($request->type == 'donator') {
+            $validation_array["commission_ratio"] = 'required|numeric';
+            if(is_array($game)) {
+                foreach($game as $game_id=>$ratio) {
+                    $validation_array["game.$game_id"]="required|numeric";
+                    $game_m = Game::find($game_id);
+                    if(!$game_m) {
+                        return redirect()->back()->with(['error_message'=>"Invalid game, try again"]);
+                    }
+                    $validation_messages["game.$game_id.required"] = "The ".$game_m->name." lucky ratio is required";
+                    $validation_messages["game.$game_id.numeric"]  = "The ".$game_m->name." lucky ratio is invalid (it must be an number)";
 
-                $ratios[$game_id] = $ratio;
+                    $ratios[$game_id] = $ratio;
+                }
+            } else {
+                return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
             }
-        } else {
-            return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
         }
 
         $this->validate($request, $validation_array, $validation_messages);
@@ -74,23 +76,27 @@ class CenterController extends Controller
 
             $center = new Center();
             $center->user_id = $user->id;
-            $center->commission_ratio = $commission_ratio;
+            $center->commission_ratio = $type == 'donator' ? $commission_ratio : GeneralSetting::settings()->cashier_commission_ratio;
             $center->name = $name;
 
             if($center_id = $center->save()) {
 
-                $saveRatios = array();
+                if($type == 'donator') {
+                    $saveRatios = array();
 
-                foreach($ratios as $game_id => $ratio) {
-                    $saveRatios[] = new LuckyRatio(['game_id'=>$game_id, 'ratio'=>$ratio]);
-                }
+                    foreach($ratios as $game_id => $ratio) {
+                        $saveRatios[] = new LuckyRatio(['game_id'=>$game_id, 'ratio'=>$ratio]);
+                    }
 
-                if($center->ratios()->saveMany($saveRatios)) {
-                    return redirect()->back()->with(['success_message'=>"Center created successfully"]);
+                    if($center->ratios()->saveMany($saveRatios)) {
+                        return redirect()->back()->with(['success_message'=>"Center created successfully"]);
+                    } else {
+                        $center->delete();
+                        $user->delete();
+                        return redirect()->back()->with(['error_message'=>"There was an error saving ratios, try again"]);
+                    }
                 } else {
-                    $center->delete();
-                    $user->delete();
-                    return redirect()->back()->with(['error_message'=>"There was an error saving ratios, try again"]);
+                    return redirect()->back()->with(['success_message'=>"Center created successfully"]);
                 }
 
             } else {
@@ -122,9 +128,8 @@ class CenterController extends Controller
 
         $validation_array = array(
             'type'=>'required|in:donator,cashier',
-            'name'=>'required|alpha_dash',
-            'email'=>'required|email|unique:users,email,'.$center->user->id,
-            'commission_ratio'=>'required|numeric'
+            'name'=>'required',
+            'email'=>'required|email|unique:users,email,'.$center->user->id
         );
 
         $validation_messages = array();
@@ -136,20 +141,23 @@ class CenterController extends Controller
         $game = $request["game"];
         $ratios = array();
 
-        if(is_array($game)) {
-            foreach($game as $game_id=>$ratio) {
-                $validation_array["game.$game_id"]="required|numeric";
-                $game_m = Game::find($game_id);
-                if(!$game_m) {
-                    return redirect()->back()->with(['error_message'=>"Invalid game, try again"]);
-                }
-                $validation_messages["game.$game_id.required"] = "The ".$game_m->name." lucky ratio is required";
-                $validation_messages["game.$game_id.numeric"]  = "The ".$game_m->name." lucky ratio is invalid (it must be an number)";
+        if($request->type == 'donator') {
+            $validation_array["commission_ratio"] = 'required|numeric';
+            if(is_array($game)) {
+                foreach($game as $game_id=>$ratio) {
+                    $validation_array["game.$game_id"]="required|numeric";
+                    $game_m = Game::find($game_id);
+                    if(!$game_m) {
+                        return redirect()->back()->with(['error_message'=>"Invalid game, try again"]);
+                    }
+                    $validation_messages["game.$game_id.required"] = "The ".$game_m->name." lucky ratio is required";
+                    $validation_messages["game.$game_id.numeric"]  = "The ".$game_m->name." lucky ratio is invalid (it must be an number)";
 
-                $ratios[$game_id] = $ratio;
+                    $ratios[$game_id] = $ratio;
+                }
+            } else {
+                return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
             }
-        } else {
-            return redirect()->back()->with(['error_message'=>"Invalid request, try again"]);
         }
 
         $this->validate($request, $validation_array, $validation_messages);
@@ -168,26 +176,32 @@ class CenterController extends Controller
 
         if($center->user->update()) {
 
-            $center->commission_ratio = $commission_ratio;
+            $center->commission_ratio = $type == 'donator' ? $commission_ratio : GeneralSetting::settings()->cashier_commission_ratio;
             $center->name = $name;
 
             if($center->update()) {
 
-                $saveRatios = $center->ratios->all();
+                if($type == 'donator') {
+                    $backedUpRatios = $center->ratios;
+                    $center->ratios()->delete();
+                    $saveRatios = [];
 
-                foreach($ratios as $game_id => $ratio) {
-                    foreach($saveRatios as $saved_ratio) {
-                        if($saved_ratio->game_id == $game_id) {
-                            $saved_ratio->ratio = $ratio;
-                        }
+                    foreach($ratios as $game_id => $ratio) {
+                        // foreach($saveRatios as $saved_ratio) {
+                        //     if($saved_ratio->game_id == $game_id) {
+                        //         $saved_ratio->ratio = $ratio;
+                        //     }
+                        // }
+                        $saveRatios[] = new LuckyRatio(['game_id'=>$game_id, 'ratio'=>$ratio]);
                     }
-                    //$saveRatios[] = new LuckyRatio(['game_id'=>$game_id, 'ratio'=>$ratio]);
-                }
 
-                if($center->ratios()->saveMany($saveRatios)) {
-                    return redirect()->back()->with(['success_message'=>"Saved successfully"]);
+                    if($center->ratios()->saveMany($saveRatios)) {
+                        return redirect()->back()->with(['success_message'=>"Saved successfully"]);
+                    } else {
+                        return redirect()->back()->with(['error_message'=>"There was an error saving ratios, try again"]);
+                    }
                 } else {
-                    return redirect()->back()->with(['error_message'=>"There was an error saving ratios, try again"]);
+                    return redirect()->back()->with(['success_message'=>"Saved successfully"]);
                 }
 
             } else {

@@ -72,9 +72,13 @@ class DonationController extends Controller
                 }
 
                 foreach($ngos as $ngo_id => $ngo) {
-                    $ngo = Ngo::find($ngo_id);
-                    if($ngo) {
+                    $ngo1 = Ngo::find($ngo_id);
+                    if($ngo1) {
+                        if(in_array($ngo, [5,10,20,50,100,200,500,1000])) {
 
+                        } else {
+                            return redirect()->back()->withInput(Input::all())->with(['error_message' => "Sorry, some ngo has invalid amounts (rather than 5,10,20,50,100,200,500,1000), please try again."]);
+                        }
                     } else {
                         return redirect()->back()->withInput(Input::all())->with(['error_message' => "Sorry, some ngo's entries are not found, please try again."]);
                     }
@@ -292,6 +296,20 @@ class DonationController extends Controller
     public function getCashierClearRequests() {
         return view('cashier.requests', [
             'clear_requests' => Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30)
+        ]);
+    }
+
+    public function getCashierPaidDonations(Request $request) {
+        $query = PaidTransaction::select("*");
+        if(Auth::user()->isCenter()) {
+            $query->where('center_id', Auth::user()->isCenter()->id);
+        } else {
+            $query->where('id','=',0);
+        }
+        $query->orderBy('created_at','desc');
+        $paid_donations = $query->paginate(31);
+        return view('cashier.paid_donations', [
+            'paid_donations' => $paid_donations
         ]);
     }
 

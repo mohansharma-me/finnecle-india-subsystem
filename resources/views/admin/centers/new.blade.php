@@ -39,9 +39,9 @@
                         <div class="form-group">
                             <label for="inputType" class="control-label col-lg-3">Type :</label>
                             <div class="col-lg-9">
-                                <select id="inputType" name="type" class="form-control">
-                                    <option value="donator">Donator</option>
-                                    <option value="cashier">Cashier</option>
+                                <select id="inputType" name="type" class="form-control" onChange="type_changed()">
+                                    <option value="donator" {{ old('type') == 'donator' ? 'selected' : '' }}>Donator</option>
+                                    <option value="cashier" {{ old('type') == 'cashier' ? 'selected' : '' }}>Cashier</option>
                                 </select>
                             </div>
                         </div>
@@ -63,7 +63,7 @@
                                 <input type="password" class="form-control" placeholder="Password..." id="inputPassword" name="password" value="{{old('password')}}" />
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="divCommissionRatio"  style="{{ old('type') == 'cashier' ? 'display:none' : '' }}">
                             <label for="inputRatio" class="control-label col-lg-3">Commission Ratio:</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" placeholder="Commission ratio in digits..." id="inputRatio" name="commission_ratio" value="{{old('commission_ratio')}}" />
@@ -71,17 +71,19 @@
                         </div>
                     </fieldset>
 
-                    <legend>Lucky Ratios</legend>
-                    <fieldset>
-                        @foreach($games as $game)
-                            <div class="form-group">
-                                <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{old('game')[$game->id]}}" />
+                    <div id="divLuckyRatios" style="{{ old('type') == 'cashier' ? 'display:none' : '' }}">
+                        <legend>Lucky Ratios</legend>
+                        <fieldset>
+                            @foreach($games as $game)
+                                <div class="form-group">
+                                    <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{old('game')[$game->id]}}" />
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </fieldset>
+                            @endforeach
+                        </fieldset>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-lg-3"></div>
@@ -89,10 +91,24 @@
                             <button type="submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
-
                     {{csrf_field()}}
                 </form>
             </div>
         </div>
     </div>
 @endsection
+
+@push('footer')
+<script type="text/javascript">
+function type_changed() {
+    var $value = $("select[name='type']").val();
+    if($value == 'donator') {
+        $("div#divLuckyRatios").slideDown();
+        $("div#divCommissionRatio").slideDown();
+    } else {
+        $("div#divLuckyRatios").slideUp();
+        $("div#divCommissionRatio").slideUp();
+    }
+}
+</script>
+@endpush

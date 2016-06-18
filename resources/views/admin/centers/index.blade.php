@@ -47,11 +47,21 @@
                             <td>{{$center->id}}</td>
                             <td>{{$center->name}} <i>({{$center->user->role}})</i></td>
                             <td>{{$center->user->email}}</td>
-                            <td>{{$center->commission_ratio}}</td>
                             <td>
-                                @foreach($center->ratios as $ratio)
-                                    <li>{{$ratio->game->name}} ({{$ratio->ratio}})</li>
-                                @endforeach
+                                @if($center->user->hasRole('donator'))
+                                    {{$center->commission_ratio}}  
+                                @else
+                                    {{$center->getCashierCommissionRatio()}}
+                                @endif
+                            </td>
+                            <td>
+                                @if($center->user->hasRole('donator') && $center->ratios)
+                                    @foreach($center->ratios as $ratio)
+                                        @if($ratio->game)
+                                            <li>{{$ratio->game->name}} ({{$ratio->ratio}})</li>
+                                        @endif
+                                    @endforeach
+                                @endif
                             </td>
                             <td>
                                 <form method="post" action="{{route('delete-center-post', ['center'=>$center->id])}}">

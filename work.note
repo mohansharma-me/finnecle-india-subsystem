@@ -1,3 +1,47 @@
+() Admin Panel
+two or more admin
++cashier don't have Lucky ratios
++all cashier's ratio will be same
++remove jodi figure from system
++Report of declared lucky ngo with status of auto or manually sorted by channle - monthly & weekly
++last 10 results of declared lucky ngo while declaring draw of respective channle
++amount to be accepted - 5,10,20,50,100,200,500,1000
++add date & time of every events (like donation datetime, paid datetime)
+-donate of all single figure
++report of cleared request by donate center & cashier center or specific one center - weekly, monthly
++Report of paid amount by center with commision - monthly & weekly
++Report of accepted donation with commission by center, by channle - monthly & weekly
++cron job for automatic however if admin can able to do it manually by selecting draw
+* * * * * php /var/www/finnecleindia.com/public_html/demo1/artisan schedule:run >> /dev/null 2>&1
+
+display following calculation on  top while declarin and  also show this calculations in report of declared ngo to admin
+1.    total donation
+2.    commision of donation centers (=commision of all donation center as per thier respective ratios)
+3.    commision of cashier centers(=total amount to be paid* commission ratio/100 )
+4.    total amount (=total donation - total commision of donation center - total commision of cashier center )
+
+() Cashier Panel
++cashier > check donation - on enter error it throws error & scanner automatically add eneter at end.
+-cashier center can modify clear amount currently it clears all pending amount.
+last 10 results of declared ngo of all channle wise
++pay now insted of pay now button
+cashier clear request calculation (paid amount + (paidamount*commisionRatio/100) )
++Report of paid amount with commision - monthly & weekly
+
+() Donation Panel
+last 10 results of declared ngo of all channle wise
++Report of accepted donation by channle & by draw - monthly & weekly
+-donation center can modify clear amount currently it clears all pending amount.
+
+() Hi
+
+design should be as same like donation grid you designed earlier
+there will be only three tab(single page, double page, tayo page)
+on the top of page show total donation
+please check attached JPEG file for calculation and design idea.
+
+======================
+
 Game
 NgoGroup
 Ngo

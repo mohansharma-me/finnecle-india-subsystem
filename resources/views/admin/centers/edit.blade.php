@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <label for="inputType" class="control-label col-lg-3">Type :</label>
                             <div class="col-lg-9">
-                                <select id="inputType" name="type" class="form-control">
+                                <select id="inputType" name="type" class="form-control" onchange="type_changed()">
                                     <option value="cashier" {{$center->user->hasRole('cashier') ? 'selected' : ''}}>Cashier</option>
                                     <option value="donator" {{$center->user->hasRole('donator') ? 'selected' : ''}}>Donator</option>
                                 </select>
@@ -64,7 +64,7 @@
                                 <small>Leave blank if you do not want to change password</small>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="divCommissionRatio"  style="{{ $center->user->hasRole('cashier') ? 'display:none' : '' }}">
                             <label for="inputRatio" class="control-label col-lg-3">Commission Ratio:</label>
                             <div class="col-lg-9">
                                 <input type="text" class="form-control" placeholder="Commission ratio in digits..." id="inputRatio" name="commission_ratio" value="{{old('commission_ratio') ? old('commission_ratio') : $center->commission_ratio}}" />
@@ -72,17 +72,19 @@
                         </div>
                     </fieldset>
 
-                    <legend>Lucky Ratios</legend>
-                    <fieldset>
-                        @foreach($games as $game)
-                            <div class="form-group">
-                                <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
-                                <div class="col-lg-9">
-                                    <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{ old('game') ? old('game')[$game->id] : $center->ratios()->where('game_id', $game->id)->first()->ratio}}" />
+                    <div id="divLuckyRatios" style="{{ $center->user->hasRole('cashier') ? 'display:none' : '' }}">
+                        <legend>Lucky Ratios</legend>
+                        <fieldset>
+                            @foreach($games as $game)
+                                <div class="form-group">
+                                    <label for="inputPassword" class="control-label col-lg-3">{{$game->name}}: </label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" placeholder="{{$game->name}} lucky ratio" id="input{{$game->id}}" name="game[{{$game->id}}]"  value="{{ old('game') ? old('game')[$game->id] : ($center->ratios()->where('game_id', $game->id)->first() ? $center->ratios()->where('game_id', $game->id)->first()->ratio : 0)}}" />
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
-                    </fieldset>
+                            @endforeach
+                        </fieldset>
+                    </div>
 
                     <div class="form-group">
                         <div class="col-lg-3"></div>
@@ -97,3 +99,18 @@
         </div>
     </div>
 @endsection
+
+@push('footer')
+<script type="text/javascript">
+function type_changed() {
+    var $value = $("select[name='type']").val();
+    if($value == 'donator') {
+        $("div#divLuckyRatios").slideDown();
+        $("div#divCommissionRatio").slideDown();
+    } else {
+        $("div#divLuckyRatios").slideUp();
+        $("div#divCommissionRatio").slideUp();
+    }
+}
+</script>
+@endpush

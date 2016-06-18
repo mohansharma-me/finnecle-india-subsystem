@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDeclarationsTable extends Migration
+class CreateGeneralSettingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,10 @@ class CreateDeclarationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('declarations', function (Blueprint $table) {
+        Schema::create('general_settings', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->integer('draw_id');
-            $table->integer('ngo_id');
-            $table->enum('status', ['processing','failed','completed']);
-            $table->integer('manually')->default(0);
+            $table->double('cashier_commission_ratio');
 
             $table->softDeletes();
             $table->timestamps();
@@ -32,6 +29,6 @@ class CreateDeclarationsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('declarations');
+        Schema::drop('general_settings');
     }
 }

@@ -52,6 +52,7 @@
                             <th width="10%">Donation</th>
                             <th width="30%">NGOs</th>
                             <th width="20%">Note</th>
+                            <th width="20%">Date & Time</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -63,6 +64,7 @@
                                 <td>Rs. {{$transaction->amount()}}/-</td>
                                 <td>{{$transaction->ngo_print_string()}}</td>
                                 <td><label class="label label-default">{{\Carbon\Carbon::parse($transaction->created_at)->format("d-m-Y H:i:s")}}</label><br/>{{$transaction->note}}</td>
+                                <td>{{$transaction->created_at->format('d-m-Y H:i')}}</td>
                                 <td>
                                     @if($transaction->declaration_id == 0)
                                         <label class="label label-default">Not Declared</label>
@@ -88,7 +90,7 @@
                     </tbody>
                     <tbody>
                         <tr>
-                            <td colspan="6" class="text-center">
+                            <td colspan="7" class="text-center">
                                 @if(\Illuminate\Support\Facades\Request::has('transaction_id'))
                                     {{$transactions->appends(['date'=>$current_date, 'transaction_id'=>\Illuminate\Support\Facades\Request::get('transaction_id')])->render()}}
                                 @else

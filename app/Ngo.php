@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Ngo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -20,9 +21,12 @@ class Ngo extends Model
         return $this->hasMany('\App\Donation');
     }
 
-    public function donation_amount($draw_id) {
-
+    public function donation_amount($draw_id, $created_at = null) {
+        if(!isset($created_at)) {
+            $created_at = \Carbon\Carbon::now();
+        }
         return DB::table('transactions')
+            ->whereDate('transactions.created_at', '=', $created_at->format('Y-m-d'))
             ->where('transactions.declaration_id',0)
             ->where('transactions.draw_id', $draw_id)
             ->join('donations', 'donations.transaction_id', '=', 'transactions.id')
@@ -31,27 +35,59 @@ class Ngo extends Model
 
     }
 
-    public function return_amount($draw_id) {
+    public static function getNgoId($ngoNumber) {
+
+        $ngo = Ngo::where('ngo', $ngoNumber)->first();
+        if($ngo) {
+            return $ngo->id;
+        }
+
+        return 0;
+    }
+
+    public function return_amount($draw_id, $created_at = null) {
+        if(!isset($created_at)) {
+            $created_at = \Carbon\Carbon::now();
+        }
+
+        $cashier_comm = GeneralSetting::settings()->cashier_commission_ratio;
+
+        $ngoIds = [ $this->id ];
+        
+        if($this->ngo_group && $this->ngo_group->game && $this->ngo_group->game->id > 2) {
+            $ngoIds[] = self::getNgoId($this->last_digit());
+        }
 
         $first = DB::table('transactions')
+            ->whereDate('transactions.created_at', '=', $created_at->format('Y-m-d'))
             ->where('transactions.declaration_id',0)
             ->where('transactions.draw_id', $draw_id)
             ->join('donations', 'donations.transaction_id', '=', 'transactions.id')
-            ->where('donations.ngo_id', $this->id)
+            ->whereIn('donations.ngo_id', $ngoIds)
             //->select()
-            ->sum(DB::raw('donations.amount*donations.lucky_ratio'));
+            ->sum(DB::raw('(donations.amount*donations.lucky_ratio)+(donations.amount*transactions.center_commission/100)+((donations.amount*donations.lucky_ratio)*'.$cashier_comm.'/100)'));
 
         return $first;
 
     }
 
-    public function return_commission_amount($draw_id) {
+    public function return_commission_amount($draw_id, $created_at = null) {
+        if(!isset($created_at)) {
+            $created_at = \Carbon\Carbon::now();
+        }
+
+        $ngoIds = [ $this->id ];
+        
+        if($this->ngo_group && $this->ngo_group->game && $this->ngo_group->game->id > 2) {
+            $ngoIds[] = self::getNgoId($this->last_digit());
+        }
 
         $rows = DB::table('transactions')
+            ->whereDate('transactions.created_at', '=', $created_at->format('Y-m-d'))
             ->where('transactions.declaration_id',0)
             ->where('transactions.draw_id', $draw_id)
             ->join('donations', 'donations.transaction_id', '=', 'transactions.id')
-            ->where('donations.ngo_id', $this->id)
+            ->whereIn('donations.ngo_id', $ngoIds)
             //->select()
             ->groupBy('transactions.id')
             ->select(DB::raw('transactions.*, (donations.amount*transactions.center_commission/100) as tran_comm_amount'))
@@ -76,5 +112,9 @@ class Ngo extends Model
         }
         return $value;
 
+    }
+
+    public function last_digit() {
+        return intval(substr($this->ngo_total(),-1));
     }
 }

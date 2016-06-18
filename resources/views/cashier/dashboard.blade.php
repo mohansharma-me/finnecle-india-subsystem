@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="well">
-                <form method="post">
+                <form method="post" action="javascript:void">
                     <legend>Check Donations</legend>
                     <fieldset>
                         <div class="form-group">
@@ -51,7 +51,7 @@
                             @if(!$transaction->paid && $transaction->lucky_amount() > 0)
                                 <tr>
                                     <th colspan="2" class="text-center">
-                                        <button class="pay-now btn btn-lg btn-success" type="button">Paid Now</button>
+                                        <button class="pay-now btn btn-lg btn-success" type="button">Pay Now</button>
                                     </th>
                                 </tr>
                             @endif

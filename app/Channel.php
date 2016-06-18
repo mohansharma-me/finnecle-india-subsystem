@@ -2,9 +2,11 @@
 
 namespace App;
 
+use App\Declaration;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Channel extends Model
 {
@@ -19,6 +21,22 @@ class Channel extends Model
     public function remainingDraws() {
         $current_time = Carbon::now()->format('H:i');
         return $this->draws()->whereRaw('time(draw_time) > time(?)', array($current_time))->get();
+    }
+
+    public function last10Declarations() {
+        $results = Declaration::select(
+            'declarations.*',
+            DB::raw("draws.name as draw_name, draws.draw_time as draw_time"),
+            DB::raw("ngos.ngo as ngo_name")
+        );
+        $channel_id = $this->id;
+        $results->join('draws', function($join) use($channel_id) {
+            $join->on('draws.id','=','declarations.draw_id');
+            $join->where('draws.channel_id','=', $channel_id);
+        });
+        $results->join('ngos','ngos.id','=','declarations.ngo_id');
+        $results->orderBy('declarations.created_at','desc');
+        return $results->paginate(10);
     }
 
     protected static function boot()

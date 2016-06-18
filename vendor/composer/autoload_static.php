@@ -306,6 +306,7 @@ class ComposerStaticInit11d7ff65e00196cc9c1dfacaaf7fe1fb
         'CreateDonationsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_30_154140_create_donations_table.php',
         'CreateDrawsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_28_160456_create_draws_table.php',
         'CreateGamesTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_28_190538_create_games_table.php',
+        'CreateGeneralSettingsTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_18_125350_create_general_settings_table.php',
         'CreateLuckyRatiosTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_052827_create_lucky_ratios_table.php',
         'CreateNgoGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_090810_create_ngo_groups_table.php',
         'CreateNgosTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_29_091054_create_ngos_table.php',

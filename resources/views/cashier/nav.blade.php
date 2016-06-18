@@ -1,1 +1,2 @@
 <li class="{{ Route::getCurrentRoute()->getName() == "cashier-clear-requests" ? "active" : "" }}"><a href="{{route('cashier-clear-requests')}}">Clear Requests</a></li>
+<li class="{{ Route::getCurrentRoute()->getName() == "cashier-paid-donations" ? "active" : "" }}"><a href="{{route('cashier-paid-donations')}}">Paid Transactions</a></li>

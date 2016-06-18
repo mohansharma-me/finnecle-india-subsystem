@@ -48,6 +48,13 @@
                     <blockquote>
                         <b>Name : </b> {{$sel_channel->name}}
                     </blockquote>
+
+                    <legend>Last 10 Declarations</legend>
+                    <ul class="list-inline list-unstyled">
+                        @foreach($sel_channel->last10Declarations() as $declaration)    
+                            <li><label class="label label-primary">NGO{{$declaration->ngo_name}}</label></li>
+                        @endforeach
+                    </ul>
                 </div>
             </div>
         @endif
@@ -95,6 +102,9 @@
             <div class="col-md-12">
                 <div class="well">
                     <legend>Total Donation : <label class='pull-right'>Rs. {{$totalDonationAmount}}/-</label></legend>
+                    <legend>Total Donotor Comm : <label class='pull-right'>Rs. {{$totalDonatorComm}}/-</label></legend>
+                    <legend>Total Cashier Comm : <label class='pull-right'>Rs. {{$totalCashierComm}}/-</label></legend>
+                    <legend>Total Amount : <label class='pull-right'>Rs. {{$totalDonationAmount - $totalDonatorComm - $totalCashierComm}}/-</label></legend>
                 </div>
             </div>
             <div class="col-md-12">
@@ -113,23 +123,28 @@
                     <?php $firstFlag = true; ?>
                     @foreach($games as $game)
                         <div class="tab-pane fade {{ $firstFlag ? "active in" : "" }}" id="tab{{$game->id}}" style="padding: 10px 15px">
-                            <div class="row">
+                            <table class="table table-bordered">
+                                <?php
+                                $current = 1;
+                                ?>
                                 @foreach($game->ngo_groups as $ngo_group)
                                     @foreach($ngo_group->ngos as $ngo)
-                                        <div class="col-xs-6 col-md-2">
-                                            <div class="thumbnail text-center">
-                                                <h4 class="caption">NGO {{$ngo->ngo}}</h4>
-                                                <p>Donation : Rs. {{$ngo->donation_amount($sel_draw->id)}}/-</p>
-                                                <p>Return : Rs. {{$ngo->return_amount($sel_draw->id)}}/-</p>
-                                                <p>Commission : Rs. {{$ngo->return_commission_amount($sel_draw->id)}}/-</p>
+                                        @if($current == 1) <tr> @endif
+                                            <td>
+                                            <div class="text-center">
+                                                <b>NGO {{$ngo->ngo}}</b><br/>   
+                                                <u>Rs. {{$ngo->return_amount($sel_draw->id)}}/-</u>
+                                                <!--<p>Return : Rs. {{$ngo->return_amount($sel_draw->id)}}/-</p>
+                                                <p>Commission : Rs. {{$ngo->return_commission_amount($sel_draw->id)}}/-</p>-->
                                                 @if($game->id > 2)
                                                 <p><a href="{{route('declare-ngo-channel-draw-ngo', ['channel'=>$sel_channel->id, 'draw'=>$sel_draw->id, 'ngo'=>$ngo->id])}}" class="btn btn-xs btn-success">Declare</a></p>
                                                 @endif
                                             </div>
-                                        </div>
+                                            </td>
+                                        @if(++$current == 16) <?php $current = 1; ?> </tr> @endif
                                     @endforeach
                                 @endforeach
-                            </div>
+                            </table>
                         </div>
                         <?php $firstFlag = false; ?>
                     @endforeach

@@ -43,4 +43,10 @@ class Center extends Model
         });
     }
 
+    ///
+
+    public function getCashierCommissionRatio() {
+        return GeneralSetting::settings()->cashier_commission_ratio;
+    }
+
 }

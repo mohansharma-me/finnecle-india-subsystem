@@ -17,6 +17,7 @@ return array(
     'CreateDonationsTable' => $baseDir . '/database/migrations/2016_05_30_154140_create_donations_table.php',
     'CreateDrawsTable' => $baseDir . '/database/migrations/2016_05_28_160456_create_draws_table.php',
     'CreateGamesTable' => $baseDir . '/database/migrations/2016_05_28_190538_create_games_table.php',
+    'CreateGeneralSettingsTable' => $baseDir . '/database/migrations/2016_06_18_125350_create_general_settings_table.php',
     'CreateLuckyRatiosTable' => $baseDir . '/database/migrations/2016_05_29_052827_create_lucky_ratios_table.php',
     'CreateNgoGroupsTable' => $baseDir . '/database/migrations/2016_05_29_090810_create_ngo_groups_table.php',
     'CreateNgosTable' => $baseDir . '/database/migrations/2016_05_29_091054_create_ngos_table.php',

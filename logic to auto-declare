@@ -1,0 +1,14 @@
+logic to auto-declare
+-----------------
+	get current time
+	get current date
+	find draw related to current time
+	find that draw is already proceed or not
+	if not then continue otherwise quit
+	get total donation of that draw
+	get automatic ratio of that draw
+	get pivot totaldonation*automaticratio/100
+find all donations for each ngo
+now select ngo which has donation amount lower than pivot amount
+now filter that ngos in desc order based on amount as well as userCount
+and select first ngo from that filtered list

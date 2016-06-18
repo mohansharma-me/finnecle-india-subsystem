@@ -2,6 +2,10 @@
 
 @section('title', "Dashboard")
 
+@push('head')
+    <link rel="stylesheet" href="{{asset('css/bootstrap-datetimepicker.css')}}" />
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -10,6 +14,41 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="form-group col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">Role :</span>
+                        <select name="role" class="form-control">
+                            <option value="" selected>Both</option>
+                            <option value="cashier">Cashier</option>
+                            <option value="donator">Donator</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">From :</span>
+                        <input type="text" name="fromDate" class='form-control' value="{{$fromDate->format('d-m-Y')}}" />
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">To :</span>
+                        <input type="text" name="toDate" class='form-control' value="{{$toDate->format('d-m-Y')}}" />
+                    </div>
+                </div>
+                <div class="form-group col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">Center :</span>
+                        <input type="text" name="center" class='form-control' value="{{$centerSearch}}" />
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover">
@@ -56,3 +95,13 @@
         </div>
     </div>
 @endsection
+
+@push('footer')
+    <script type="text/javascript" src="{{asset('js/moment.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+        $("input[name='fromDate'],input[name='toDate']").datetimepicker({format:"DD-MM-YYYY"});
+    });
+    </script>
+@endpush

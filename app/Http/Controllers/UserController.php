@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ClearRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class UserController extends Controller
@@ -67,7 +68,7 @@ class UserController extends Controller
         return redirect()->route('index')->with(['success_message'=>'You are successfully logged out.']);
     }
 
-    public function getDashboard() {
+    public function getDashboard(Request $request) {
         $dashboardViewName = Auth::user()->getRole('dashboard');
         if(view()->exists($dashboardViewName)) {
 
@@ -78,7 +79,41 @@ class UserController extends Controller
                     $data["clear_requests"] = Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30);
                     break;
                 case "admin":
-                    $data["clear_requests"] = ClearRequest::orderBy('id', 'desc')->paginate(30);
+                    $fromDate = \Carbon\Carbon::createFromFormat('d-m-Y H:i:s', \Carbon\Carbon::now()->format('d-m-Y 00:00:00'));
+                    $toDate = \Carbon\Carbon::createFromFormat('d-m-Y H:i:s', \Carbon\Carbon::now()->addDays(1)->format('d-m-Y 23:59:59'));
+
+                    $query = ClearRequest::select(
+                        "clear_requests.*",
+                        DB::raw("centers.id as center_id, centers.user_id as center_user_id, centers.name as center_name"),
+                        DB::raw("users.role as user_role")
+                    );
+                    $query->join('centers', 'centers.id','=','clear_requests.center_id');
+                    $query->join('users','users.id','=','centers.user_id');
+
+                    if($request->has('center')) {
+                        $query->where('centers.name','like','%'.$request->center.'%');
+                    }
+
+                    if($request->has('fromDate') && $request->has('toDate')) {
+                        try {
+                            $fromDate = \Carbon\Carbon::createFromFormat('d-m-Y H:i:s', $request->fromDate." 00:00:00");
+                            $toDate = \Carbon\Carbon::createFromFormat('d-m-Y H:i:s', $request->toDate." 23:59:59");
+                        } catch(\Exception $e) {}
+
+                        $diffDays = $toDate->diffInDays($fromDate);
+                        if($diffDays >= 0) {
+                            $query->whereBetween('clear_requests.created_at', [$fromDate, $toDate]);
+                        }
+                    }
+
+                    if($request->has('role')) {
+                        $query->where('users.role','=',$request->role);
+                    }
+
+                    $data["clear_requests"] = $query->paginate(30);
+                    $data["fromDate"] = $fromDate;
+                    $data["toDate"] = $toDate;
+                    $data["centerSearch"] = $request->center;
                     break;
                 case "cashier":
                     $data["clear_requests"] = Auth::user()->isCenter()->clear_requests()->orderBy('id', 'desc')->paginate(30);
