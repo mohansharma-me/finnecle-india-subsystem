@@ -40,7 +40,7 @@ class DeclarationController extends Controller
         $games = Game::all();
 
         $totalDonations = Donation::totalDonation($draw->id);
-        $totalDonatorComm = 0;
+        $totalDonatorComm = Ngo::total_donator_commission($draw->id);
         $totalCashierComm = 0;
 
         $ngoGroups = NgoGroup::all();
@@ -48,7 +48,6 @@ class DeclarationController extends Controller
             foreach($ngoGroup->ngos as $ngo) {
                 $returnAmount = $ngo->return_amount($draw->id);
                 $totalCashierComm += ($returnAmount * GeneralSetting::settings()->cashier_commission_ratio / 100);
-                $totalDonatorComm += $ngo->return_commission_amount($draw->id);
             }
         }
 

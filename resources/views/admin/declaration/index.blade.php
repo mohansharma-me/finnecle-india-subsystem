@@ -103,8 +103,8 @@
                 <div class="well">
                     <legend>Total Donation : <label class='pull-right'>Rs. {{$totalDonationAmount}}/-</label></legend>
                     <legend>Total Donotor Comm : <label class='pull-right'>Rs. {{$totalDonatorComm}}/-</label></legend>
-                    <legend>Total Cashier Comm : <label class='pull-right'>Rs. {{$totalCashierComm}}/-</label></legend>
-                    <legend>Total Amount : <label class='pull-right'>Rs. {{$totalDonationAmount - $totalDonatorComm - $totalCashierComm}}/-</label></legend>
+                    <!-- <legend>Total Cashier Comm : <label class='pull-right'>Rs. {{$totalCashierComm}}/-</label></legend> -->
+                    <!-- <legend>Total Amount : <label class='pull-right'>Rs. {{$totalDonationAmount - $totalDonatorComm}}/-</label></legend> -->
                 </div>
             </div>
             <div class="col-md-12">
@@ -133,7 +133,7 @@
                                             <td>
                                             <div class="text-center">
                                                 <b>NGO {{$ngo->ngo}}</b><br/>   
-                                                <u>Rs. {{$ngo->return_amount($sel_draw->id)}}/-</u>
+                                                <u>Rs. {{$ngo->return_amount($sel_draw->id)}}/-</u><br/>({{$ngo->slip_count($sel_draw->id)}})
                                                 <!--<p>Return : Rs. {{$ngo->return_amount($sel_draw->id)}}/-</p>
                                                 <p>Commission : Rs. {{$ngo->return_commission_amount($sel_draw->id)}}/-</p>-->
                                                 @if($game->id > 2)

@@ -36,7 +36,7 @@ class Kernel extends ConsoleKernel
             ob_start();
 
             $now = \Carbon\Carbon::now();
-            $draw_time = "23:59";//$now->format("H:i");
+            $draw_time = $now->format("H:i");
             $date = $now->format('Y-m-d');
             echo "Draw Time : ".$draw_time."\n";
             echo "Date : ".$date."\n";
