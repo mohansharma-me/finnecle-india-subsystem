@@ -54,6 +54,16 @@
                                         <button class="pay-now btn btn-lg btn-success" type="button">Pay Now</button>
                                     </th>
                                 </tr>
+                            @elseif($transaction->paid)
+                                <tr>
+                                    <th colspan=2 class="text-center">
+                                        @if($transaction->paid_transaction && $transaction->paid_transaction->center)
+                                            Paid by {{ucwords($transaction->paid_transaction->center->name)}}
+                                        @else
+                                            Already paid!!
+                                        @endif
+                                    </th>
+                                </tr>
                             @endif
                         </table>
                     </fieldset>
