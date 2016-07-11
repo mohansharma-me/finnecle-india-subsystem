@@ -52,8 +52,8 @@ class User extends Model implements Authenticatable
                 $ids = [];
                 $transactions = $center->transactions()->where('clear_request_id', 0)->get();
                 foreach($transactions as $transaction) {
-                    //$tr_amount = $transaction->amount();
-                    $tr_amount = $transaction->lucky_amount();
+                    $tr_amount = $transaction->amount();
+                    //$tr_amount = $transaction->lucky_amount();
                     $tr_com = $tr_amount * $transaction->center_commission / 100;
                     $sum += $tr_amount - $tr_com;
                     $com_sum += $tr_com;
@@ -72,7 +72,8 @@ class User extends Model implements Authenticatable
 
                 foreach($paid_transactions as $paid_transaction) {
                     $transaction = $paid_transaction->transaction;
-                    $tr_amount = $transaction->amount();
+                    //$tr_amount = $transaction->amount();
+                    $tr_amount = $transaction->lucky_amount();
                     $tr_com = $tr_amount * $paid_transaction->center_commission / 100;
                     $sum += $tr_amount - $tr_com;
                     $com_sum += $tr_com;
