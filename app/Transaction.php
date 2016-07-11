@@ -57,7 +57,7 @@ class Transaction extends Model
     }
 
     public function paid_transaction() {
-        return $this->belongsTo('\App\PaidTransaction');
+        return $this->hasOne('\App\PaidTransaction','transaction_id','id');
     }
 
     public function isPaid() {
