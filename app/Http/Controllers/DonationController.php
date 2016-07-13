@@ -212,7 +212,7 @@ class DonationController extends Controller
 
                 $sumAmount = 0;
                 foreach($transactions as $transaction) {
-                    $tr_amount = $transaction->amount();
+                    $tr_amount = $transaction->lucky_amount();
                     $sumAmount += $tr_amount - ($tr_amount * $transaction->center_commission / 100);
                 }
 
@@ -258,7 +258,7 @@ class DonationController extends Controller
 
                 $sumAmount = 0;
                 foreach($transactions as $transaction) {
-                    $tr_amount = $transaction->transaction->amount();
+                    $tr_amount = $transaction->transaction->lucky_amount();
                     $sumAmount += $tr_amount - ($tr_amount * $transaction->center_commission / 100);
                 }
 
